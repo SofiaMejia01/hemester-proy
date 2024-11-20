@@ -1,4 +1,3 @@
-<?php include 'session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +17,10 @@
     <!-- Barra de arriba -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 navbar-divider">
             <div class="container-fluid">
-                <!-- Logo -->
-                <a href="admin_menu.php">
-                    <img src="img/logoHemenster.png" alt="Logo o Imagen" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
-                </a>
+              <!-- Logo -->
+          <a href="admin_menu.php"> <img src="img/logoHemenster.png" alt="Logo" style="width: 100px; height: 100px; object-fit: cover;"></
+                <img src="img/logoHemenster.png" alt="Logo o Imagen" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+            </a>
 
                 <!-- Espacio flexible -->
                 <div class="d-flex ms-auto align-items-center">

@@ -1,4 +1,5 @@
 <?php include 'session_check.php'; 
+include 'accesos.php';
 
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
@@ -58,6 +59,9 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuari
         JOIN perfiles_usuario p ON u.ID_Perfil = p.ID_Perfil");
 ?>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,48 +74,13 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuari
     <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-    <!-- Barra de arriba -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 navbar-divider">
-        <div class="container-fluid">
-            <!-- Logo -->
-            <a href="admin_menu.php"> <img src="img/logoHemenster.png" alt="Logo" style="width: 100px; height: 100px; object-fit: cover;"></
-                <img src="img/logoHemenster.png" alt="Logo o Imagen" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
-            </a>
-
-            <!-- Espacio flexible -->
-            <div class="d-flex ms-auto align-items-center">
-                <!-- Texto "Hola, usuario" -->
-                <span class="navbar-text text-light me-3" style="font-size: 24px;">
-                    Hola, <?php echo htmlspecialchars($nombreUsuario); ?>
-                </span>
-                <!-- Botón "Cerrar Sesión" -->
-                <form action="cerrar_sesion.php" method="POST">
-                    <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-        <!-- Barra de la izquierda -->   
-    <div class="container-fluid">
-        <div class="row vh-100">
-            <nav class="col-12 col-md-2 bg-primary text-light p-3 vh-100">
-                <ul class="nav flex-column">                    
-                    <li class="nav-item sidebar-item py-2">
-                        <a class="nav-link text-light" href="mantenimiento_usuarios.php">Gestión de Usuarios</a>
-                    </li>
-                    <li class="nav-item sidebar-item py-2">
-                        <a class="nav-link text-light" href="perfiles.php">Perfiles</a>
-                    </li>
-                    <li class="nav-item py-2">
-                        <a class="nav-link text-light" href="control_sesiones.php">Control de Sesiones</a>
-                    </li>
-                </ul>
-            </nav>
+  
             <main class="col-12 col-md-10">
                 <div class="content-row">
                     
                      <div class="col-4">
                         <div class="container">
+                            <br>
                             <h3>Modificar Usuario</h3>
                             <form id="updateUserForm" action="modificar_usuario.php?id=<?php echo $userId; ?>" method="POST" class="p-3 border rounded">
                                 <div class="form-group mb-3">
