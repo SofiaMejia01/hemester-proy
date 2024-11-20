@@ -9,6 +9,9 @@ $dbname = "hemenster_bd_users"; // The name of your database
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+
+//comentario nuevo dwq3dwqdqw
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
