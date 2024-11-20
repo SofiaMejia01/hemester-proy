@@ -1,0 +1,217 @@
+<?php include 'session_check.php'; 
+
+if (isset($_GET['id'])) {
+    $userId = $_GET['id'];
+
+    // Fetch user details based on the provided ID
+    $stmt = $conn->prepare("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuario, u.ID_Perfil, u.ID_Estado, e.Nombre_Estado AS Estado, p.Nombre_Perfil AS Perfil 
+                             FROM usuario u 
+                             JOIN estado_usuario e ON u.ID_Estado = e.ID_Estado 
+                             JOIN perfiles_usuario p ON u.ID_Perfil = p.ID_Perfil 
+                             WHERE u.ID_Usuario = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+    } else {
+        echo "Usuario no encontrado.";
+        exit();
+    }
+} else {
+    echo "ID de usuario no proporcionado.";
+    exit();
+}
+
+// Fetch existing roles and states for the dropdowns
+$roles_query = "SELECT ID_Perfil, Nombre_Perfil FROM perfiles_usuario";
+$roles_result = $conn->query($roles_query);
+
+$states_query = "SELECT ID_Estado, Nombre_Estado FROM estado_usuario";
+$states_result = $conn->query($states_query);
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nombre_usuario = $_POST['username'];
+    $password_usuario = $_POST['password'];
+    $id_perfil = $_POST['rol'];
+    $id_estado = $_POST['estado'];
+
+    // Update the user details in the database
+    $update_stmt = $conn->prepare("UPDATE usuario SET Nombre_Usuario = ?, Password_Usuario = ?, ID_Perfil = ?, ID_Estado = ? WHERE ID_Usuario = ?");
+    $update_stmt->bind_param("ssiii", $nombre_usuario, $password_usuario, $id_perfil, $id_estado, $userId);
+
+     // Return JSON response
+    if ($update_stmt->execute()) {
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => $update_stmt->error]);
+    }
+    $update_stmt->close();
+    exit();
+}
+
+$result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuario, e.Nombre_Estado AS Estado, p.Nombre_Perfil AS Perfil 
+        FROM usuario u 
+        JOIN estado_usuario e ON u.ID_Estado = e.ID_Estado 
+        JOIN perfiles_usuario p ON u.ID_Perfil = p.ID_Perfil");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+    <!-- Barra de arriba -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 navbar-divider">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a href="admin_menu.php"> <img src="img/logoHemenster.png" alt="Logo" style="width: 100px; height: 100px; object-fit: cover;"></
+                <img src="img/logoHemenster.png" alt="Logo o Imagen" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+            </a>
+
+            <!-- Espacio flexible -->
+            <div class="d-flex ms-auto align-items-center">
+                <!-- Texto "Hola, usuario" -->
+                <span class="navbar-text text-light me-3" style="font-size: 24px;">
+                    Hola, <?php echo htmlspecialchars($nombreUsuario); ?>
+                </span>
+                <!-- Botón "Cerrar Sesión" -->
+                <form action="cerrar_sesion.php" method="POST">
+                    <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+        <!-- Barra de la izquierda -->   
+    <div class="container-fluid">
+        <div class="row vh-100">
+            <nav class="col-12 col-md-2 bg-primary text-light p-3 vh-100">
+                <ul class="nav flex-column">                    
+                    <li class="nav-item sidebar-item py-2">
+                        <a class="nav-link text-light" href="mantenimiento_usuarios.php">Gestión de Usuarios</a>
+                    </li>
+                    <li class="nav-item sidebar-item py-2">
+                        <a class="nav-link text-light" href="perfiles.php">Perfiles</a>
+                    </li>
+                    <li class="nav-item py-2">
+                        <a class="nav-link text-light" href="control_sesiones.php">Control de Sesiones</a>
+                    </li>
+                </ul>
+            </nav>
+            <main class="col-12 col-md-10">
+                <div class="content-row">
+                    
+                     <div class="col-4">
+                        <div class="container">
+                            <h3>Modificar Usuario</h3>
+                            <form id="updateUserForm" action="modificar_usuario.php?id=<?php echo $userId; ?>" method="POST" class="p-3 border rounded">
+                                <div class="form-group mb-3">
+                                    <label for="username" class="form-label">Nombre de Usuario:</label>
+                                    <input type="text" name="username" id="username" class="form-control" 
+                                        value="<?php echo htmlspecialchars($user['Nombre_Usuario']); ?>" required>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="password" class="form-label ">Contraseña:</label>
+                                    <input type="password" name="password" id="password" class="form-control" 
+                                        value="<?php echo htmlspecialchars($user['Password_Usuario']); ?>" required>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="rol" class="form-label">Perfil:</label>
+                                    <select name="rol" id="rol" class="form-control" required>
+                                        <?php while ($row = $roles_result->fetch_assoc()): ?>
+                                            <option value="<?php echo $row['ID_Perfil']; ?>" 
+                                                <?php echo ($row['ID_Perfil'] == $user['ID_Perfil']) ? 'selected' : ''; ?>>
+                                                <?php echo $row['Nombre_Perfil']; ?>
+                                            </option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="estado" class="form-label">Estado:</label>
+                                    <select name="estado" id="estado" class="form-control" required>
+                                        <?php while ($row = $states_result->fetch_assoc()): ?>
+                                            <option value="<?php echo $row['ID_Estado']; ?>" 
+                                                <?php echo ($row['ID_Estado'] == $user['ID_Estado']) ? 'selected' : ''; ?>>
+                                                <?php echo $row['Nombre_Estado']; ?>
+                                            </option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+                            </form>
+                        </div>
+                    </div>
+
+                   
+                    <div class="divider"></div>
+
+                   
+                    <div class="table-section bg-white">
+                        <h5>Listado de Usuarios</h5>
+                        <table id="listUser" class="display table table-striped">
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>Nombre de Usuario</th>
+                                <th>Contraseña</th>
+                                <th>Perfil</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>                            
+                            <?php
+                            if ($result->num_rows > 0) {
+                                // Output data of each row
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>
+                                            <td>{$row['ID_Usuario']}</td>
+                                            <td>{$row['Nombre_Usuario']}</td>
+                                            <td>{$row['Password_Usuario']}</td>
+                                            <td>{$row['Perfil']}</td>
+                                            <td>{$row['Estado']}</td>                                            
+                                            <td>
+                                                <a href='modificar_usuario.php?id={$row['ID_Usuario']}'>Modificar</a>
+                                            </td>
+                                        </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>No users found</td></tr>";
+                            }
+                            ?>                            
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="js/ajax_modificarusuario.js"></script>  
+    <script src="js/index.js"></script>    
+</body>
+</html>
+
+<?php
+$conn->close(); // Close the database connection
+?>
