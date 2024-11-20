@@ -1,0 +1,5 @@
+.sidebar-item .nav-link.active {
+    background-color: #0d6efd; /* Cambia el color de fondo */
+    font-weight: bold; /* Opcional: hace que el texto sea negrita */
+    border-radius: 5px; /* Opcional: añade bordes redondeados */
+}
