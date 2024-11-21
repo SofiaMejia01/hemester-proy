@@ -3,3 +3,7 @@
     font-weight: bold; /* Opcional: hace que el texto sea negrita */
     border-radius: 5px; /* Opcional: añade bordes redondeados */
 }
+
+.barralateral{
+ width:260px;
+}
