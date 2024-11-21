@@ -56,7 +56,7 @@
                     <a class="nav-link text-light" href="kardex.php">Reportes</a>
                 </li>
                 <li class="nav-item sidebar-item">
-                    <a class="nav-link text-light" href="mantenimiento_usuarios.php">Accesos</a>
+                    <a class="nav-link text-light" href="accesos.php">Accesos</a>
                 </li>
             </ul>
         </nav>

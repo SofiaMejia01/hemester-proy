@@ -1,3 +1,6 @@
+<?php
+
+ include 'session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/navegacion.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for AJAX -->
 </head>
 
 <body>
@@ -41,30 +45,61 @@
 <div class="container-fluid">
     <div class="row vh-100">
         <!-- Barra lateral -->
-        <nav class="col-12 col-md-2 bg-primary text-light  collapse d-md-block" id="sidebarMenu">
+        <nav class="col-12 col-md-2 bg-primary text-light collapse d-md-block" id="sidebarMenu">
             <ul class="nav flex-column">
                 <li class="nav-item sidebar-item">
-                    <a class="nav-link text-light" href="mantenimiento_usuarios.php">Gestión de Usuarios</a>
+                    <a class="nav-link text-light" href="#" id="loadUsers">Gestión de Usuarios</a>
                 </li>
                 <li class="nav-item sidebar-item">
-                    <a class="nav-link text-light" href="perfiles.php">Perfiles</a>
+                    <a class="nav-link text-light" href="#" id="loadProfiles">Perfiles</a>
                 </li>
                 <li class="nav-item sidebar-item">
-                    <a class="nav-link text-light" href="control_sesiones.php">Control de Sesiones</a>
+                    <a class="nav-link text-light" href="#" id="loadSessions">Control de Sesiones</a>
                 </li>
-               
             </ul>
         </nav>
 
+        <!-- Contenedor para el contenido principal que se cargará dinámicamente -->
+        <div id="contentArea" class="col-12 col-md-10">
+            <!-- El contenido cargado por AJAX aparecerá aquí -->
+        </div>
+    </div>
+</div>
 
-     
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    
-    
+<script>
+    $(document).ready(function() {
+        // Cargar la página de "Gestión de Usuarios" por defecto cuando se cargue la página
+         $('#loadUsers').click(function() {
+             loadPage('mantenimiento_usuarios.php');
+         });
+        loadPage('mantenimiento_usuarios.php');
 
-     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
+
+        // Función para cargar contenido mediante AJAX
+        function loadPage(page) {
+            $.ajax({
+                url: page,
+                type: 'GET',
+                success: function(response) {
+                    $('#contentArea').html(response); // Cargar el contenido en el área de contenido
+                }
+            });
+        }
+
+        // Opciones del menú
+        $('#loadProfiles').click(function() {
+            loadPage('perfiles.php');
+        });
+
+        $('#loadSessions').click(function() {
+            loadPage('control_sesiones.php');
+        });
+    });
+</script>
 
 </body>
 </html>
+

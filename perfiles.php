@@ -1,5 +1,5 @@
-<?php include 'session_check.php'; 
-include 'accesos.php';
+<?php 
+include 'session_check.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre_perfil'])) {
     $nombrePerfil = $_POST['nombre_perfil'];
@@ -43,48 +43,51 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="css/menu.css">
-
 </head>
 <body>
- 
-            <main class="col-12 col-md-10">
-                <div class="content-row">                    
-                    <div class="col-4">
-                        <div class="container">
-                            <br>
-                            <h3 class="mb-4">Agregar Nuevo Perfil</h3>
-                            <form id="addProfileForm" action="perfiles.php" method="POST" class="p-3 border rounded">
-                                <div class="form-group mb-3">
-                                    <label for="nombre_perfil" class="form-label">Nombre del Perfil:</label>
-                                    <input type="text" name="nombre_perfil" id="nombre_perfil" class="form-control" required>
-                                </div>
-                                
-                                <div class="form-group mb-3">
-                                    <label for="descripción_perfil" class="form-label">Descripción del Perfil:</label>
-                                    <input type="text" name="descripción_perfil" id="descripción_perfil" class="form-control" required>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="submit" class="btn btn-primary px-4">Agregar</button>
-                                </div>
-                            </form>
+
+    <!-- Contenedor principal -->
+    <div class="container-fluid">
+        <!-- Fila que agrupa las dos secciones -->
+        <div class="row">
+            
+            <!-- Sección para agregar un nuevo perfil (columna izquierda) -->
+            <div class="col-12 col-xl-4">
+                <div class="container">
+                    <br>
+                    <h3 class="mb-4">Agregar Nuevo Perfil</h3>
+                    <form id="addProfileForm" action="perfiles.php" method="POST" class="p-3 border rounded">
+                        <div class="form-group mb-3">
+                            <label for="nombre_perfil" class="form-label">Nombre del Perfil:</label>
+                            <input type="text" name="nombre_perfil" id="nombre_perfil" class="form-control" required>
                         </div>
-                    </div>
 
-                   
-                    <div class="divider"></div>
+                        <div class="form-group mb-3">
+                            <label for="descripción_perfil" class="form-label">Descripción del Perfil:</label>
+                            <input type="text" name="descripción_perfil" id="descripción_perfil" class="form-control" required>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary px-4">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-                   
-                    <div class="table-section bg-white">
-                        <h5>Listado de Perfiles</h5>
+            <!-- Sección para listar los perfiles (columna derecha) -->
+            <div class="col-12 col-xl-8">
+                <div class="table-section bg-white">
+                    <h5>Listado de Perfiles</h5>
+                    <!-- Agregamos table-responsive para hacer la tabla desplazable en pantallas pequeñas -->
+                    <div class="table-responsive">
                         <table id="listRole" class="display table table-striped">
                             <thead>
                                 <tr>
-                                <th>ID</th>
-                                <th>Nombre del Perfil</th>
-                                <th>Descripción del Perfil</th>
-                                <th>Acciones</th>
+                                    <th>ID</th>
+                                    <th>Nombre del Perfil</th>
+                                    <th>Descripción del Perfil</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            </thead>                            
+                            </thead>
                             <?php
                             if ($result->num_rows > 0) {
                                 // Output data of each row
@@ -100,16 +103,16 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                                         </tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='5'>No hay perfiles registrados</td></tr>";
+                                echo "<tr><td colspan='4'>No hay perfiles registrados</td></tr>";
                             }
                             ?>                            
                         </table>
-                    </div> 
+                    </div>
                 </div>
-            </main>
+            </div>
+
         </div>
     </div>
-
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -120,12 +123,18 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
     <script src="js/index.js"></script>
     <script src="js/ajax_perfiles.js"></script>
     <script>
+       
+
+
     function confirmDelete() {
         return confirm("¿Estás seguro de que deseas eliminar este perfil?");
     }
     </script>
+
+
 </body>
 </html>
+
 
 <?php
 $conn->close(); // Close the database connection

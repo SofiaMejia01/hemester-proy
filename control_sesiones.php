@@ -1,5 +1,5 @@
-<?php include 'session_check.php'; 
-include 'accesos.php';
+<?php 
+include 'session_check.php'; 
 
 
 $sql = "SELECT * FROM sesion_usuario" ;
@@ -18,7 +18,7 @@ $result = $conn->query($sql);
 </head>
 <body>
 
-            <main class="col-12 col-md-10">
+            <main class="col-12 col-md-12">
 
                     <div class="table-section bg-white">
                         <h5>Listado de Sesiones</h5>
