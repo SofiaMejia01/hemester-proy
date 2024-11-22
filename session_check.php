@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
 $nombreUsuario = $_SESSION['username'];
 
 // Fetch the user's details from the database
-$stmt = $conn->prepare("SELECT ID_Usuario, ID_Estado, ID_Perfil FROM usuario WHERE Nombre_Usuario = ?");
+$stmt = $conn->prepare("SELECT ID_Usuario, ID_Estado, ID_Perfil, Nombre_Trabajador FROM usuario WHERE Nombre_Usuario = ?");
 $stmt->bind_param("s", $nombreUsuario);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
     $userId = $user['ID_Usuario'];
     $userProfile = $user['ID_Perfil'];
-
+    $nombreTrabajador = $user['Nombre_Trabajador']; 
     // Check the user's session state using the Nombre_Usuario
     $sessionStmt = $conn->prepare("SELECT Cod_Estado FROM sesion_usuario WHERE ID_Usuario = (SELECT Nombre_Usuario FROM usuario WHERE Nombre_Usuario = ?)");
     $sessionStmt->bind_param("s", $nombreUsuario);

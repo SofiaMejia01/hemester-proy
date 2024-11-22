@@ -23,7 +23,7 @@
         <!-- Texto "Hola, usuario" y botón "Cerrar Sesión" -->
         <div class="d-flex align-items-center ms-auto">
             <span class="navbar-text text-light me-3" style="font-size: 16px;">
-                Hola, <?php echo htmlspecialchars($nombreUsuario); ?>
+                Hola, <?php echo htmlspecialchars($nombreTrabajador); ?>
             </span>
             <form action="cerrar_sesion.php" method="POST" class="d-inline-block me-2">
                 <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>

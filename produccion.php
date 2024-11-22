@@ -26,7 +26,7 @@
                 <div class="d-flex ms-auto align-items-center">
                     <!-- Texto "Hola, usuario" -->
                     <span class="navbar-text text-light me-3" style="font-size: 24px;">
-                        Hola, <?php echo htmlspecialchars($nombreUsuario); ?>
+                        Hola, <?php echo htmlspecialchars($nombreTrabajador); ?>
                     </span>
                     <!-- Botón "Cerrar Sesión" -->
                     <form action="cerrar_sesion.php" method="POST">
