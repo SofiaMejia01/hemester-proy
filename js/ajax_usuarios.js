@@ -23,7 +23,7 @@ $(document).ready(function () {
               $("#perfil option:selected").text(), // Perfil seleccionado
               $("#estado option:selected").text(), // Estado seleccionado
               `
-            <a href='modificar_usuario.php?id=${response.newUserId}'>Modificar</a>
+            <a href='modificar_usuario.php?id=${response.newUserId}' class='LoadModificarUsuario' >Modificar</a>
             `,
             ])
             .draw(false); // Dibujar la nueva fila sin resetear la paginación

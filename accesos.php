@@ -97,6 +97,20 @@
         $('#loadSessions').click(function() {
             loadPage('control_sesiones.php');
         });
+
+         // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
+         $('#contentArea').on('click', '.LoadModificarUsuario', function(e) {
+        e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+        var href = $(this).attr('href'); // Obtener la URL del enlace
+        loadPage(href); // Cargar la página usando AJAX
+        });
+
+        // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
+        $('#contentArea').on('click', '.LoadModificarPerfil', function(e) {
+        e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+        var href = $(this).attr('href'); // Obtener la URL del enlace
+        loadPage(href); // Cargar la página usando AJAX
+        });
     });
 </script>
 

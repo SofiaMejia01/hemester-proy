@@ -1,5 +1,5 @@
 <?php include 'session_check.php'; 
-include 'accesos.php';
+//include 'accesos.php';
 
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
@@ -74,11 +74,11 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Trabajador, u.Nombre_Usuar
     <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-  
-            <main class="col-12 col-md-10">
-                <div class="content-row">
-                    
-                     <div class="col-4">
+    <!-- Contenido principal -->
+            <div class="container-fluid">
+                <div class="row">
+                     <!-- Formulario para actualizar un usuario -->
+                     <div class="col-12 col-xl-4">
                         <div class="container">
                             <br>
                             <h3>Modificar Usuario</h3>
@@ -130,9 +130,10 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Trabajador, u.Nombre_Usuar
                     </div>
 
                    
-                    <div class="divider"></div>
+                    <!-- <div class="divider"></div> -->
 
-                   
+                   <!-- Tabla de usuarios -->
+                    <div class="col-12 col-xl-8">
                     <div class="table-section bg-white">
                         <h5>Listado de Usuarios</h5>
                         <table id="listUser" class="display table table-striped">
@@ -159,7 +160,8 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Trabajador, u.Nombre_Usuar
                                             <td>{$row['Perfil']}</td>
                                             <td>{$row['Estado']}</td>                                            
                                             <td>
-                                                <a href='modificar_usuario.php?id={$row['ID_Usuario']}'>Modificar</a>
+                                                
+                                                <a href='modificar_usuario.php?id={$row['ID_Usuario']}' class='LoadModificarUsuario'>Modificar</a>
                                             </td>
                                         </tr>";
                                 }
@@ -168,13 +170,15 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Trabajador, u.Nombre_Usuar
                             }
                             ?>                            
                         </table>
+                    </div>                       
                     </div>
+                  
                 </div>
-            </main>
+            </div>
 
 
 
-        </div>
+           </div>
     </div>
 
     <!-- Bootstrap JS -->

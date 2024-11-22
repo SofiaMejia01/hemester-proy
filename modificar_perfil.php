@@ -1,6 +1,6 @@
 <?php 
 include 'session_check.php'; 
-include 'accesos.php';
+//include 'accesos.php';
 
 // Fetch the profile to modify
 if (isset($_GET['id'])) {
@@ -56,10 +56,11 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
     <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-
-            <main class="col-12 col-md-10">
-                <div class="content-row">                    
-                    <div class="col-4">
+     <!-- Contenido principal -->
+            <div class="container-fluid">
+                <div class="row"> 
+                     <!-- Formulario para actualizar un perfil -->                    
+                    <div class="col-12 col-xl-4">
                         <div class="container">
                             <br>
                             <h3 class="mb-4">Modificar Perfil</h3>
@@ -81,10 +82,11 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                     </div>
 
                    
-                    <div class="divider"></div>
+                    <!-- <div class="divider"></div> -->
 
-                   
-                    <div class="table-section bg-white">
+                    <!-- Tabla de perfiles -->
+                     <div class="col-12 col-xl-8">
+                     <div class="table-section bg-white">
                         <h5>Listado de Perfiles</h5>
                         <table id="listRole" class="display table table-striped">
                             <thead>
@@ -104,7 +106,8 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                                             <td>{$row['Nombre_Perfil']}</td>
                                             <td>{$row['Descripción_Perfil']}</td>
                                             <td>
-                                                <a href='modificar_perfil.php?id={$row['ID_Perfil']}'>Modificar</a>
+                                                <a href='modificar_perfil.php?id={$row['ID_Perfil']}' class='LoadModificarPerfil'>Modificar</a>
+                                                
                                                 <a href='eliminar_perfil.php?id={$row['ID_Perfil']}' onclick='return confirmDelete();'>Eliminar</a>
                                             </td>
                                         </tr>";
@@ -115,8 +118,10 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                             ?>                            
                         </table>
                     </div> 
+                     </div>
+                   
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 

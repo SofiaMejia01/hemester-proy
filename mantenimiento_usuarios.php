@@ -141,7 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <td>{$row['Perfil']}</td>
                                             <td>{$row['Estado']}</td>
                                             <td>
-                                                <a href='modificar_usuario.php?id={$row['ID_Usuario']}'>Modificar</a>
+                                                
+                                                 <a href='modificar_usuario.php?id={$row['ID_Usuario']}' class='LoadModificarUsuario'>Modificar</a>
                                             </td>
                                         </tr>";
                                 }

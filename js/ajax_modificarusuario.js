@@ -13,7 +13,7 @@ $(document).ready(function () {
       dataType: "json", // Expect a JSON response
       success: function (response) {
         if (response.status === "success") {
-          window.location.href = "mantenimiento_usuarios.php"; // Redirect to users page
+          window.location.href = "accesos.php"; // Redirect to users page
         } else {
           alert("Error al modificar el usuario: " + response.message);
         }

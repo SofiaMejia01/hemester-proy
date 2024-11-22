@@ -13,7 +13,7 @@ $(document).ready(function () {
       dataType: "json", // Expect a JSON response
       success: function (response) {
         if (response.status === "success") {
-          window.location.href = "perfiles.php"; // Redirect to profiles page
+          window.location.href = "accesos.php"; // Redirect to profiles page
         } else {
           alert("Error al modificar el perfil: " + response.message);
         }
