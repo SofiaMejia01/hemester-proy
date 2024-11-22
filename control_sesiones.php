@@ -2,8 +2,21 @@
 include 'session_check.php'; 
 
 
-$sql = "SELECT * FROM sesion_usuario" ;
-$result = $conn->query($sql);
+// Query to fetch all sessions
+$sql_sessions = "SELECT * FROM sesion_usuario";
+$result_sessions = $conn->query($sql_sessions);
+
+// Query to fetch all users (only the worker names)
+$sql_users = "SELECT Nombre_Trabajador FROM usuario";
+$result_users = $conn->query($sql_users);
+
+$users = [];
+if ($result_users->num_rows > 0) {
+    while ($row = $result_users->fetch_assoc()) {
+        $users[] = $row['Nombre_Trabajador']; // Add worker names to the array
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,27 +40,35 @@ $result = $conn->query($sql);
                                 <tr>
                                 <th>ID</th>
                                 <th>ID Usuario</th>
+                                <th>Nombre del Trabajador</th>
                                 <th>Estado</th>
                                 <th>Fecha de Registro</th>
                                 <th>Acciones</th>
                                 </tr>
                             </thead>                            
                             <?php
-                            if ($result->num_rows > 0) {
-                                // Output data of each row
-                                while ($row = $result->fetch_assoc()) {
+                            if ($result_sessions->num_rows > 0) {
+                                // Initialize a counter for user names
+                                $userIndex = 0;
+                                $userCount = count($users); // Get the total number of users
+
+                                while ($row = $result_sessions->fetch_assoc()) {
+                                    // Get the worker name from the users array
+                                    $nombre_trabajador = $userCount > 0 ? $users[$userIndex % $userCount] : 'Sin Nombre'; // Use modulo to cycle through user names
                                     echo "<tr>
                                             <td>{$row['ID_Sesion']}</td>
-                                            <td>{$row['ID_Usuario']}</td>
+                                            <td>{$row['ID_Usuario']}</td> <!-- Display ID_Usuario from sesion_usuario -->
+                                            <td>{$nombre_trabajador}</td> <!-- Display Nombre_Trabajador from usuario -->
                                             <td>{$row['Cod_Estado']}</td>
                                             <td>{$row['Fecha_Registro']}</td>
                                             <td>
                                                 <a href='eliminar_sesion.php?id={$row['ID_Sesion']}' onclick='return confirmDelete();'>Eliminar Sesión</a>
                                             </td>
                                         </tr>";
+                                    $userIndex++; // Increment index for the next session
                                 }
                             } else {
-                                echo "<tr><td colspan='5'>No hay perfiles registrados</td></tr>";
+                                echo "<tr><td colspan='6'>No hay sesiones registradas</td></tr>";
                             }
                             ?>                            
                         </table>

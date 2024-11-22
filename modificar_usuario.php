@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
     $userId = $_GET['id'];
 
     // Fetch user details based on the provided ID
-    $stmt = $conn->prepare("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuario, u.ID_Perfil, u.ID_Estado, e.Nombre_Estado AS Estado, p.Nombre_Perfil AS Perfil 
+    $stmt = $conn->prepare("SELECT u.ID_Usuario,u.Nombre_Trabajador, u.Nombre_Usuario, u.Password_Usuario, u.ID_Perfil, u.ID_Estado, e.Nombre_Estado AS Estado, p.Nombre_Perfil AS Perfil 
                              FROM usuario u 
                              JOIN estado_usuario e ON u.ID_Estado = e.ID_Estado 
                              JOIN perfiles_usuario p ON u.ID_Perfil = p.ID_Perfil 
@@ -34,15 +34,15 @@ $states_result = $conn->query($states_query);
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nombre_trabajador = $_POST['nombre_trabajador'];
     $nombre_usuario = $_POST['username'];
     $password_usuario = $_POST['password'];
     $id_perfil = $_POST['rol'];
     $id_estado = $_POST['estado'];
 
     // Update the user details in the database
-    $update_stmt = $conn->prepare("UPDATE usuario SET Nombre_Usuario = ?, Password_Usuario = ?, ID_Perfil = ?, ID_Estado = ? WHERE ID_Usuario = ?");
-    $update_stmt->bind_param("ssiii", $nombre_usuario, $password_usuario, $id_perfil, $id_estado, $userId);
-
+    $update_stmt = $conn->prepare("UPDATE usuario SET Nombre_Trabajador = ?, Nombre_Usuario = ?, Password_Usuario = ?, ID_Perfil = ?, ID_Estado = ? WHERE ID_Usuario = ?");
+    $update_stmt->bind_param("ssssii", $nombre_trabajador, $nombre_usuario, $password_usuario, $id_perfil, $id_estado, $userId);
      // Return JSON response
     if ($update_stmt->execute()) {
         echo json_encode(['status' => 'success']);
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 
-$result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuario, e.Nombre_Estado AS Estado, p.Nombre_Perfil AS Perfil 
+$result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Trabajador, u.Nombre_Usuario, u.Password_Usuario, e.Nombre_Estado AS Estado, p.Nombre_Perfil AS Perfil 
         FROM usuario u 
         JOIN estado_usuario e ON u.ID_Estado = e.ID_Estado 
         JOIN perfiles_usuario p ON u.ID_Perfil = p.ID_Perfil");
@@ -83,6 +83,11 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuari
                             <br>
                             <h3>Modificar Usuario</h3>
                             <form id="updateUserForm" action="modificar_usuario.php?id=<?php echo $userId; ?>" method="POST" class="p-3 border rounded">
+                                <div class="form-group mb-3">
+                                    <label for="nombre_trabajador" class="form-label">Nombre del Trabajador:</label>
+                                    <input type="text" name="nombre_trabajador" id="nombre_trabajador" class="form-control" 
+                                        value="<?php echo htmlspecialchars($user['Nombre_Trabajador']); ?>" required>
+                                </div>
                                 <div class="form-group mb-3">
                                     <label for="username" class="form-label">Nombre de Usuario:</label>
                                     <input type="text" name="username" id="username" class="form-control" 
@@ -134,6 +139,7 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuari
                             <thead>
                                 <tr>
                                 <th>ID</th>
+                                <th>Nombre del Trabajador</th>
                                 <th>Nombre de Usuario</th>
                                 <th>Contraseña</th>
                                 <th>Perfil</th>
@@ -147,6 +153,7 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Usuario, u.Password_Usuari
                                 while ($row = $result->fetch_assoc()) {
                                     echo "<tr>
                                             <td>{$row['ID_Usuario']}</td>
+                                            <td>{$row['Nombre_Trabajador']}</td>
                                             <td>{$row['Nombre_Usuario']}</td>
                                             <td>{$row['Password_Usuario']}</td>
                                             <td>{$row['Perfil']}</td>

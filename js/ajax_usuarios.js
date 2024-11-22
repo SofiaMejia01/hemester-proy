@@ -17,6 +17,7 @@ $(document).ready(function () {
           usuariosTable.row
             .add([
               response["newUserId"], // ID del nuevo usuario
+              response["nombre_trabajador"],
               response["nombre_usuario"], // Nombre de usuario
               response["password_usuario"], // Mostrar la contraseña aquí
               $("#perfil option:selected").text(), // Perfil seleccionado
