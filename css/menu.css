@@ -67,10 +67,9 @@ html {
   background-color: #0f3458 !important; /* Color actualizado */
 }
 
-@media(min-width: 576px) {
+@media(min-width: 992px) {
   .vh-mobil-100 {
-    height: 100vh;
-    
+    min-height: 100vh; 
   }
 }
 
@@ -87,5 +86,11 @@ html {
   }
 }
 
+
+ .color-footer{
+  
+  color: rgb(179, 175, 175);
+  /*height: 55px;*/
+} 
 
 

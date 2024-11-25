@@ -65,11 +65,31 @@
         </nav>
 
         <!-- Contenedor para el contenido principal que se cargará dinámicamente -->
-        <div id="contentArea" class="col-12 col-md-10">
+        <div id="contentArea" class="col-12 col-md-12 col-lg-10">
             <!-- El contenido cargado por AJAX aparecerá aquí -->
+    
         </div>
+          
+       
     </div>
+
 </div>
+
+<footer class="py-2 bg-dark color-footer mt-auto">
+                <div class="container-fluid px-4 mb-1">
+                     <div class="d-flex align-items-center justify-content-center small text-center">
+                            <div class="mx-2">&copy 2024 Hemester E.I.R.L. Todos los derechos reservados  | ERP Versión 1.0 |
+                            </div>
+                            <div >
+                            <a  class="mx-2 color-footer" href="#">Política de Privacidad</a>
+                            </div>
+                            <div>
+                            <a class="mx-1 color-footer" href="#">Términos &amp; Condiciones</a>
+                            </div> 
+                    </div>
+                </div>
+</footer>
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

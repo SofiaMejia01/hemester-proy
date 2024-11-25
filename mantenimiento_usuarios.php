@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="css/menu.css">
     
 </head>
-<body>
+<body class="">
 
   <!-- Contenido principal -->
   <div class="container-fluid">
@@ -156,8 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
+   
   </div>
-
+                           
   <!-- Scripts -->
   
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
