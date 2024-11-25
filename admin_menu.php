@@ -39,7 +39,7 @@
 
 <!-- Layout general -->
 <div class="container-fluid">
-    <div class="row vh-100">
+    <div class="row vh-mobil-100">
         <!-- Barra lateral -->
         <nav class="col-12 col-md-2 bg-primary text-light  collapse d-md-block" id="sidebarMenu">
             <ul class="nav flex-column">

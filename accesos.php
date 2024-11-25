@@ -12,12 +12,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/navegacion.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for AJAX -->
+    
 </head>
 
 <body>
 <!-- Barra de arriba -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 fixed-top">
     <div class="container-fluid">
         <!-- Logo -->
         <a href="admin_menu.php">
@@ -29,12 +29,12 @@
             <span class="navbar-text text-light me-3" style="font-size: 16px;">
                 Hola, <?php echo htmlspecialchars($nombreTrabajador); ?>
             </span>
-            <form action="cerrar_sesion.php" method="POST" class="d-inline-block me-2">
+            <form action="cerrar_sesion.php" method="POST" class="d-none d-sm-inline-block me-2">
                 <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
             </form>
 
             <!-- Botón hamburguesa (siempre visible en modo móvil) -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenuAccesos" aria-controls="sidebarMenuAccesos" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -43,9 +43,9 @@
 
 <!-- Layout general -->
 <div class="container-fluid">
-    <div class="row vh-100">
+    <div class="row vh-mobil-100">
         <!-- Barra lateral -->
-        <nav class="col-12 col-md-2 bg-primary text-light collapse d-md-block" id="sidebarMenu">
+        <nav class="col-12 col-lg-2 bg-primary text-light collapse d-lg-block fixed-top-mobile nav-mobil-mt" id="sidebarMenuAccesos" data-bs-scroll="true">
             <ul class="nav flex-column">
                 <li class="nav-item sidebar-item">
                     <a class="nav-link text-light" href="#" id="loadUsers">Gestión de Usuarios</a>
@@ -55,6 +55,11 @@
                 </li>
                 <li class="nav-item sidebar-item">
                     <a class="nav-link text-light" href="#" id="loadSessions">Control de Sesiones</a>
+                </li>
+                <li>
+                    <form action="cerrar_sesion.php" method="POST" class="d-inline-block d-sm-none my-2 me-2">
+                        <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
+                    </form>
                 </li>
             </ul>
         </nav>
@@ -68,6 +73,10 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <script>
     $(document).ready(function() {
