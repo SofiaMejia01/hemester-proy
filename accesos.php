@@ -140,6 +140,13 @@
         var href = $(this).attr('href'); // Obtener la URL del enlace
         loadPage(href); // Cargar la página usando AJAX
         });
+
+          // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
+          $('#contentArea').on('click', '.LoadEliminarPerfil', function(e) {
+             e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+             var href = $(this).attr('href');
+              loadPage(href); // Cargar la página usando AJAX
+        });
     });
 </script>
 

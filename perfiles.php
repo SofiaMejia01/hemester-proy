@@ -98,7 +98,7 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                                             <td>{$row['Descripción_Perfil']}</td>
                                             <td>
                                                 <a href='modificar_perfil.php?id={$row['ID_Perfil']}' class='LoadModificarPerfil'>Modificar</a>    
-                                                <a href='eliminar_perfil.php?id={$row['ID_Perfil']}' onclick='return confirmDelete();'>Eliminar</a>
+                                                <a href='eliminar_perfil.php?id={$row['ID_Perfil']}' class='LoadEliminarPerfil' onclick='return confirmDelete();'>Eliminar</a>
                                             </td>
                                         </tr>";
                                 }

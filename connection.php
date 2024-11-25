@@ -4,7 +4,7 @@
 $servername = "localhost"; // Usually localhost
 $username = "root"; // Default username for XAMPP
 $password = "mysql"; // Default password is empty for XAMPP
-$dbname = "hemenster_marco"; // The name of your database
+$dbname = "hemester_marco"; // The name of your database
 
 // db de Sofia hemenster_marco
 // pswd sofia mysql

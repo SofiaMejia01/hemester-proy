@@ -62,7 +62,7 @@
         </nav>
 
         <!-- Contenido principal -->
-        <main class="col-12 col-md-10 p-4">
+        <main class="col-12 col-md-10 p-4" id="contentArea2">
             <h1 class="text-center">Bienvenido al Menú de Administrador</h1>
             <p class="text-center">Aquí puedes gestionar todas las operaciones administrativas.</p>
             <!-- Additional content can be added here -->
@@ -96,5 +96,10 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="js/index.js"></script>
+
+
+    
+
+
 </body>
 </html>
