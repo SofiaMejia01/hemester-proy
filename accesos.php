@@ -134,12 +134,38 @@
         loadPage(href); // Cargar la página usando AJAX
         });
 
-        // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
-        $('#contentArea').on('click', '.LoadModificarPerfil', function(e) {
-        e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-        var href = $(this).attr('href'); // Obtener la URL del enlace
-        loadPage(href); // Cargar la página usando AJAX
-        });
+         // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
+         $('#contentArea').on('click', '.LoadModificarPerfil', function(e) {
+            e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+            var href = $(this).attr('href'); // Obtener la URL del enlace
+           loadPage(href); // Cargar la página usando AJAX
+            });
+
+
+           // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
+        //    $('#contentArea').on('click', '.LoadModificarPerfil', function(e) {
+        //     e.preventDefault(); // Prevenir la redirección
+
+        //      var perfilId = $(this).attr('href').split('=')[1]; // Obtener el ID del perfil desde la URL del enlace
+
+        //      // Usar AJAX para cargar el contenido de modificar_perfil.php
+        //      $.ajax({
+        //        url: 'modificar_perfil.php',  // Página que quieres cargar
+        //         type: 'GET',
+        //         data: { id: perfilId },  // Pasar el ID del perfil
+        //         success: function(response) {
+        //             $('#contentArea').html(response);  // Cargar el contenido en un contenedor específico
+        //               },
+        //          error: function() {
+        //                alert('Hubo un error al cargar el contenido.');
+        //              }
+        //      });
+        //  });
+
+
+
+
+
 
           // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
           $('#contentArea').on('click', '.LoadEliminarPerfil', function(e) {
@@ -149,6 +175,10 @@
         });
     });
 </script>
+
+
+
+
 
 </body>
 </html>

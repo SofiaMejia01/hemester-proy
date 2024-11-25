@@ -97,7 +97,7 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                                             <td>{$row['Nombre_Perfil']}</td>
                                             <td>{$row['Descripción_Perfil']}</td>
                                             <td>
-                                                <a href='modificar_perfil.php?id={$row['ID_Perfil']}' class='LoadModificarPerfil'>Modificar</a>    
+                                                <a class='LoadModificarPerfil' href='modificar_perfil.php?id={$row['ID_Perfil']}' >Modificar</a>    
                                                 <a href='eliminar_perfil.php?id={$row['ID_Perfil']}' class='LoadEliminarPerfil' onclick='return confirmDelete();'>Eliminar</a>
                                             </td>
                                         </tr>";
@@ -116,19 +116,20 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
 
   
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="js/ajax_perfiles.js"></script> 
     <script src="js/index.js"></script> 
-    <script src="js/ajax_perfiles.js"></script>       
+          
     <script>
        
-
-
     function confirmDelete() {
         return confirm("¿Estás seguro de que deseas eliminar este perfil?");
     }
     </script>
+
+
 
 
 </body>
