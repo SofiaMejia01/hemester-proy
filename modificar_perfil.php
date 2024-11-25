@@ -30,10 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ssi", $nombrePerfil, $descripcionPerfil, $id);
     
     if ($stmt->execute()) {
-        // Return success response
-        echo json_encode(['status' => 'success']);
+        // Return success response with the URL to load
+        echo json_encode(['status' => 'success', 'redirectUrl' => 'perfiles.php']);
     } else {
-        // Return error response
         echo json_encode(['status' => 'error', 'message' => $stmt->error]);
     }
     $stmt->close();

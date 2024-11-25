@@ -15,7 +15,6 @@ $(document).ready(function () {
       data: formData,
       success: function (response) {
         console.log("Respuesta del servidor:", response);
-
         if (response.status === "success") {
           // Agrega la nueva fila usando DataTables
           table.row
@@ -32,6 +31,7 @@ $(document).ready(function () {
 
           // Limpia el formulario
           $("#addProfileForm")[0].reset();
+          alert("Perfil agregado exitosamente.");
         } else {
           alert("Error al agregar el perfil: " + response.message);
         }

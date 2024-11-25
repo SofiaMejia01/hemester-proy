@@ -13,7 +13,8 @@ $(document).ready(function () {
       dataType: "json", // Expect a JSON response
       success: function (response) {
         if (response.status === "success") {
-          window.location.href = "accesos.php"; // Redirect to profiles page
+          // Load the perfiles.php page into the content area
+          loadPage(response.redirectUrl);
         } else {
           alert("Error al modificar el perfil: " + response.message);
         }
@@ -24,3 +25,13 @@ $(document).ready(function () {
     });
   });
 });
+
+function loadPage(page) {
+  $.ajax({
+    url: page,
+    type: "GET",
+    success: function (response) {
+      $("#contentArea").html(response); // Load the content into the content area
+    },
+  });
+}

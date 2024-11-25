@@ -30,6 +30,8 @@ $(document).ready(function () {
 
           // Opcionalmente, resetear el formulario
           $("#addUserForm")[0].reset();
+
+          alert("Usuario agregado exitosamente.");
         } else {
           alert("Error: " + response.message); // Mostrar mensaje de error
         }

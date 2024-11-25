@@ -10,17 +10,17 @@ if (isset($_GET['id'])) {
     
     if ($stmt->execute()) {
         // Redirect back to perfiles.php after successful deletion
-        header("Location: perfiles.php");
+        header("Location: accesos.php");
         exit();
     } else {
         // Handle the error (optional)
-        header("Location: perfiles.php"); // Redirect even on error
+        header("Location: accesos.php"); // Redirect even on error
         exit();
     }
     $stmt->close();
 } else {
     // Redirect if no ID is provided
-    header("Location: perfiles.php");
+    header("Location: accesos.php");
     exit();
 }
 ?>

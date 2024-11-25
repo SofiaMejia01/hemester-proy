@@ -15,7 +15,7 @@
     
 </head>
 
-<body>
+<body style="padding-top: 65px;">
 <!-- Barra de arriba -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 fixed-top">
     <div class="container-fluid">

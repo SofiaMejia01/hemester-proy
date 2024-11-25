@@ -10,12 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre_perfil'])) {
     $stmt->bind_param("ss", $nombrePerfil, $descripcionPerfil);
     
     if ($stmt->execute()) {
-    $response = [
-        'status' => 'success',
-        'newProfileId' => $conn->insert_id,
-        'nombre_perfil' => $nombrePerfil,
-        'descripcion_perfil' => $descripcionPerfil,
-    ];
+        $response = [
+            'status' => 'success',
+            'newProfileId' => $conn->insert_id,
+            'nombre_perfil' => $nombrePerfil,
+            'descripcion_perfil' => $descripcionPerfil,
+        ];
     } else {
         $response = [
             'status' => 'error',
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre_perfil'])) {
         ];
     }
 
-    // Asegúrate de establecer el tipo de contenido como JSON
+    
     header('Content-Type: application/json');
     echo json_encode($response);
     exit;
@@ -119,8 +119,8 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/ajax_perfiles.js"></script>
+    <script src="js/index.js"></script> 
+    <script src="js/ajax_perfiles.js"></script>       
     <script>
        
 
