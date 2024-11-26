@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 
     if ($stmt->execute()) {
         // Redirect to the control_sesiones.php page after successful update
-        header("Location: control_sesiones.php");
+        header("Location: accesos.php");
         exit();
     } else {
         echo "Error updating session: " . $stmt->error;
