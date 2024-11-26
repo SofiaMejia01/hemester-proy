@@ -62,7 +62,7 @@ if ($result_users->num_rows > 0) {
                                             <td>{$row['Cod_Estado']}</td>
                                             <td>{$row['Fecha_Registro']}</td>
                                             <td>
-                                                <a href='eliminar_sesion.php?id={$row['ID_Sesion']}' onclick='return confirmDelete();'>Eliminar Sesión</a>
+                                                <a href='#' class='delete-session' data-id='{$row['ID_Sesion']}'>Eliminar Sesión</a>
                                             </td>
                                         </tr>";
                                     $userIndex++; // Increment index for the next session
@@ -85,6 +85,7 @@ if ($result_users->num_rows > 0) {
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/ajax_sesiones.js"></script>
     <script>
     function confirmDelete() {
         return confirm("¿Estás seguro de que deseas cerrar esta sesión?");
