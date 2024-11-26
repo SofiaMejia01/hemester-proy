@@ -78,7 +78,7 @@
 <footer class="py-2 bg-dark color-footer mt-auto">
                 <div class="container-fluid px-4 mb-1">
                      <div class="d-flex align-items-center justify-content-center small text-center">
-                            <div class="mx-2">&copy 2024 Hemester E.I.R.L. Todos los derechos reservados  | ERP Versión 1.0 |
+                            <div class="mx-2">&copy 2024 Hemester S.A.C.  Todos los derechos reservados  | ERP Versión 1.0 |
                             </div>
                             <div >
                             <a  class="mx-2 color-footer" href="#">Política de Privacidad</a>
