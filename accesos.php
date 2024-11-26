@@ -2,6 +2,8 @@
 
  include 'session_check.php'; ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +12,19 @@
     <title>Admin Menu</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/navegacion.css">
-    
 </head>
 
 <body style="padding-top: 65px;">
 <!-- Barra de arriba -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 fixed-top">
     <div class="container-fluid">
+        <button class="navbar-toggler d-block me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenuAccesos" aria-controls="sidebarMenuAccesos" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <!-- Logo -->
         <a href="admin_menu.php">
             <img src="img/logoHemenster.png" alt="Logo" style="width: 50px; height: 50px; object-fit: cover;">
@@ -32,80 +38,73 @@
             <form action="cerrar_sesion.php" method="POST" class="d-none d-sm-inline-block me-2">
                 <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
             </form>
-
-            <!-- Botón hamburguesa (siempre visible en modo móvil) -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenuAccesos" aria-controls="sidebarMenuAccesos" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
         </div>
     </div>
 </nav>
 
+<!-- Offcanvas Barra lateral (sin título) -->
+<div class="offcanvas offcanvas-start bg-primary text-light" tabindex="-1" id="sidebarMenuAccesos" aria-labelledby="sidebarMenuAccesosLabel">
+    <div class="offcanvas-header">
+        <!-- Título del Offcanvas -->
+        <h5 class="offcanvas-title text-light ms-3" id="sidebarMenuAccesosLabel">Accesos</h5>
+        <!-- Botón de "X" para cerrar (color claro) -->
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item sidebar-item">
+                <a class="nav-link text-light" href="#" id="loadUsers">Gestión de Usuarios</a>
+            </li>
+            <li class="nav-item sidebar-item">
+                <a class="nav-link text-light" href="#" id="loadProfiles">Perfiles</a>
+            </li>
+            <li class="nav-item sidebar-item">
+                <a class="nav-link text-light" href="#" id="loadSessions">Control de Sesiones</a>
+            </li>
+            <li class="nav-item sidebar-item">
+                <a class="nav-link text-light" href="admin_menu.php" >Regresar al Menú Principal</a>
+            </li>
+            <li>
+                <form action="cerrar_sesion.php" method="POST" class="d-inline-block d-sm-none my-2 me-2">
+                    <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <!-- Layout general -->
 <div class="container-fluid">
     <div class="row vh-mobil-100">
-        <!-- Barra lateral -->
-        <nav class="col-12 col-lg-2 bg-primary text-light collapse d-lg-block fixed-top-mobile nav-mobil-mt" id="sidebarMenuAccesos" data-bs-scroll="true">
-            <ul class="nav flex-column">
-                <li class="nav-item sidebar-item">
-                    <a class="nav-link text-light" href="#" id="loadUsers">Gestión de Usuarios</a>
-                </li>
-                <li class="nav-item sidebar-item">
-                    <a class="nav-link text-light" href="#" id="loadProfiles">Perfiles</a>
-                </li>
-                <li class="nav-item sidebar-item">
-                    <a class="nav-link text-light" href="#" id="loadSessions">Control de Sesiones</a>
-                </li>
-                <li>
-                    <form action="cerrar_sesion.php" method="POST" class="d-inline-block d-sm-none my-2 me-2">
-                        <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
-
         <!-- Contenedor para el contenido principal que se cargará dinámicamente -->
-        <div id="contentArea" class="col-12 col-md-12 col-lg-10">
+        <div id="contentArea" class="col-12 col-md-12 col-lg-12">
             <!-- El contenido cargado por AJAX aparecerá aquí -->
-    
         </div>
-          
-       
     </div>
-
 </div>
 
 <footer class="py-2 bg-dark color-footer mt-auto">
-                <div class="container-fluid px-4 mb-1">
-                     <div class="d-flex align-items-center justify-content-center small text-center">
-                            <div class="mx-2">&copy 2024 Hemester S.A.C.  Todos los derechos reservados  | ERP Versión 1.0 |
-                            </div>
-                            <div >
-                            <a  class="mx-2 color-footer" href="#">Política de Privacidad</a>
-                            </div>
-                            <div>
-                            <a class="mx-1 color-footer" href="#">Términos &amp; Condiciones</a>
-                            </div> 
-                    </div>
-                </div>
+    <div class="container-fluid px-4 mb-1">
+        <div class="d-flex align-items-center justify-content-center small text-center">
+            <div class="mx-2">&copy 2024 Hemester S.A.C.  Todos los derechos reservados  | ERP Versión 1.0 |</div>
+            <div><a class="mx-2 color-footer" href="#">Política de Privacidad</a></div>
+            <div><a class="mx-1 color-footer" href="#">Términos &amp; Condiciones</a></div> 
+        </div>
+    </div>
 </footer>
-
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <script>
     $(document).ready(function() {
         // Cargar la página de "Gestión de Usuarios" por defecto cuando se cargue la página
-         $('#loadUsers').click(function() {
-             loadPage('mantenimiento_usuarios.php');
-         });
+        $('#loadUsers').click(function() {
+            loadPage('mantenimiento_usuarios.php');
+        });
         loadPage('mantenimiento_usuarios.php');
-
 
         // Función para cargar contenido mediante AJAX
         function loadPage(page) {
@@ -127,59 +126,26 @@
             loadPage('control_sesiones.php');
         });
 
-         // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
-         $('#contentArea').on('click', '.LoadModificarUsuario', function(e) {
-        e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-        var href = $(this).attr('href'); // Obtener la URL del enlace
-        loadPage(href); // Cargar la página usando AJAX
-        });
-
-         // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
-         $('#contentArea').on('click', '.LoadModificarPerfil', function(e) {
+        // Delegación de eventos para enlaces cargados dinámicamente
+        $('#contentArea').on('click', '.LoadModificarUsuario', function(e) {
             e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
             var href = $(this).attr('href'); // Obtener la URL del enlace
-           loadPage(href); // Cargar la página usando AJAX
-            });
+            loadPage(href); // Cargar la página usando AJAX
+        });
 
+        $('#contentArea').on('click', '.LoadModificarPerfil', function(e) {
+            e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+            var href = $(this).attr('href'); // Obtener la URL del enlace
+            loadPage(href); // Cargar la página usando AJAX
+        });
 
-           // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
-        //    $('#contentArea').on('click', '.LoadModificarPerfil', function(e) {
-        //     e.preventDefault(); // Prevenir la redirección
-
-        //      var perfilId = $(this).attr('href').split('=')[1]; // Obtener el ID del perfil desde la URL del enlace
-
-        //      // Usar AJAX para cargar el contenido de modificar_perfil.php
-        //      $.ajax({
-        //        url: 'modificar_perfil.php',  // Página que quieres cargar
-        //         type: 'GET',
-        //         data: { id: perfilId },  // Pasar el ID del perfil
-        //         success: function(response) {
-        //             $('#contentArea').html(response);  // Cargar el contenido en un contenedor específico
-        //               },
-        //          error: function() {
-        //                alert('Hubo un error al cargar el contenido.');
-        //              }
-        //      });
-        //  });
-
-
-
-
-
-
-          // Delegación de eventos para enlaces cargados dinámicamente, para modificar*
-          $('#contentArea').on('click', '.LoadEliminarPerfil', function(e) {
-             e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-             var href = $(this).attr('href');
-              loadPage(href); // Cargar la página usando AJAX
+        $('#contentArea').on('click', '.LoadEliminarPerfil', function(e) {
+            e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+            var href = $(this).attr('href');
+            loadPage(href); // Cargar la página usando AJAX
         });
     });
 </script>
 
-
-
-
-
 </body>
 </html>
-
