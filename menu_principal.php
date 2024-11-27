@@ -1,9 +1,7 @@
 <?php
-include 'session_check.php';
-
+include 'session_check.php'; 
+   
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -11,7 +9,7 @@ include 'session_check.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de Valoracion de Producto</title>
+    <title>Menu Principal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
@@ -19,7 +17,7 @@ include 'session_check.php';
 </head>
 <body>
 
-    <h1 class="text-center">Reporte de Valoracion de Producto</h1>
+    <h1 class="text-center">Menu Principal</h1>
 
 
 

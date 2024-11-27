@@ -1,6 +1,6 @@
 <?php
 include 'session_check.php'; 
-    include 'almacen.php';
+   
 ?>
 
 
@@ -19,13 +19,12 @@ include 'session_check.php';
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/navegacion.css">
 </head>
-
 <body>
 
+<h1 class="text-center">Gestion de Productos</h1>
 
     
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- DataTables JS -->
