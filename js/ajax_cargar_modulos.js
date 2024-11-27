@@ -43,6 +43,10 @@
         /*------------Cargar el modulo de Accesos-------------------*/ 
         $('#loadUsers').click(function() {
             loadPage('mantenimiento_usuarios.php');
+
+              // Mostrar el spinner y ocultar el contenido
+             $("#spinner").show();
+             $("#contentArea").hide()
         });
 
         $('#loadProfiles').click(function() {
@@ -102,9 +106,27 @@
                 url: page,
                 type: 'GET',
                 success: function(response) {
-                    $('#contentArea').html(response); // Cargar el contenido en el área de contenido
+
+                    // Simular un tiempo de demora
+                setTimeout(function () {
+                    $("#spinner").hide();
+                    $('#contentArea').html(response).show(); // Cargar el contenido en el área de contenido
+
+                }, 5000);
+
+
+                   
+                },
+                error: function () {
+                    // Manejar errores, ocultar el spinner
+                    $("#spinner").hide();
+                    $("#contentArea").html("<p>Error al cargar el contenido.</p>").show();
                 }
             });
+
+           
+
+            
         }
     });
 

@@ -176,9 +176,19 @@
 <!-- Layout general -->
 <div class="container-fluid">
     <div class="row vh-mobil-100">
+
+        <div id="spinner" class="text-center" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+         </div>
+        
+
         <!-- Contenedor para el contenido principal que se cargará dinámicamente -->
         <div id="contentArea" class="col-12 col-md-12 col-lg-12">
             <!-- El contenido cargado por AJAX aparecerá aquí -->
+
+        
         </div>
     </div>
 </div>
