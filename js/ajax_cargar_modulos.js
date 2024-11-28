@@ -71,14 +71,14 @@
         
     
 
-        /*------------Cargar el modulo de Accesos-------------------*/ 
-        $('#loadUsers').click(function() {
-            loadPage('mantenimiento_usuarios.php');
+  /*------------Cargar el modulo de Accesos-------------------*/
+  $("#loadUsers").click(function () {
+    loadPage("mantenimiento_usuarios.php");
 
-              // Mostrar el spinner y ocultar el contenido
-             $("#spinner").show();
-             $("#contentArea").hide()
-        });
+    // Mostrar el spinner y ocultar el contenido
+    $("#spinner").show();
+    $("#contentArea").hide();
+  });
 
         $('#loadProfiles').click(function() {
             loadPage('perfiles.php');
