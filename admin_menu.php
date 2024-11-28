@@ -83,7 +83,7 @@
                               
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="#gestion_inventario" id="loadInventarios"><i class="fa-regular fa-rectangle-list"></i>&nbsp;Gestión de Inventarios</a>
+                                <a class="nav-link text-light" href="#layout_inventario" id="loadInventarios"><i class="fa-regular fa-rectangle-list"></i>&nbsp;Gestión de Inventarios</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="#valoración_producto" id="loadValoracionProd"><i class="fa-regular fa-star-half-stroke"></i>&nbsp;Valoración de Productos</a>

@@ -53,27 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-    <h1 class="text-center">Gestion de Inventario</h1>
-
-    <div class="container my-4">
-        <div class="row">
-            <div class="col text-start">
-                <a href="admin_menu.php" class="btn btn-primary">Listado General</a>
-            </div>
-            <div class="col text-center">
-                <a href="mantenimiento_diamantes.php" class="btn btn-secondary">Diamantes GIA</a>
-            </div>
-            <div class="col text-end">
-                <a href="mantenimiento_gdc.php" class="btn btn-success">Gemas de Color</a>
-            </div>
-        </div>
-    </div>
-    <br>
-    <hr>
     <div class="container-fluid">
     <div class="row">
         <!-- Formulario para agregar un nuevo certificado -->
-        <div class="col-12 col-xl-4">
+        <div class="col-12 col-xl-4 mb-5">
                 <div class="container">
                     <h3>Agregar Nueva Gema de Color</h3>
                     <form action="mantenimiento_gdc.php" method="POST" class="p-3 border rounded">
@@ -155,9 +138,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
             </div>
-
+        
             <!-- DataTable Section -->
-            <div class="col-12 col-xl-8">
+            <div class="col-12 col-xl-8 mb-5">
                 <div class="table-section bg-white p-3">
                 <h5>Lista de Gemas de Color</h5>
                 <br>

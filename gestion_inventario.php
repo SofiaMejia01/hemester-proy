@@ -18,29 +18,11 @@ $result = mysqli_query($conn, $query);
     <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-
-    <h1 class="text-center">Gestion de Inventario</h1>
-
-    <div class="container my-4">
-        <div class="row">
-            <div class="col text-start">
-                <a href="admin_menu.php" class="btn btn-primary">Listado General</a>
-            </div>
-            <div class="col text-center">
-                <a href="mantenimiento_diamantes.php" class="btn btn-secondary">Diamantes GIA</a>
-            </div>
-            <div class="col text-end">
-                <a href="mantenimiento_gdc.php" class="btn btn-success">Gemas de Color</a>
-            </div>
-        </div>
-    </div>
-    <br>
-    <hr>    
-    <div class="container-fluid">
+<div class="container-fluid">
         <div class="row">           
             <!-- DataTable para listar las joyas -->
             <div class="col-12">
-                <div class="table-section bg-white p-3">
+                <div class="table-section bg-white p-3 mb-5">
                     <h5>Lista de Joyas</h5>
                     <br>
                     <div class="table-responsive">
@@ -103,18 +85,12 @@ $result = mysqli_query($conn, $query);
             </div>
         </div>
     </div>
-    
-  
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   
     <script src="js/index.js"></script> 
           
-
-
-
-
 </body>
 </html>

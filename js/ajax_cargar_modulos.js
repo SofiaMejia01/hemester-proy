@@ -18,7 +18,7 @@
         });
     
          $('#loadInventarios').click(function() {
-                loadPage('gestion_inventario.php');
+                loadPage('layout_inventario.php');
 
                 // Mostrar el spinner y ocultar el contenido
              $("#spinner").show();
