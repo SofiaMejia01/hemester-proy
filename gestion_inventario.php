@@ -68,7 +68,6 @@ $result = mysqli_query($conn, $query);
                                     <th>Subtotal (USD)</th>
                                     <th>Total (USD)</th>
                                     <th>Estado</th>
-                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,9 +94,6 @@ $result = mysqli_query($conn, $query);
                                         <td><?php echo $row['SubTotal_USD']; ?></td>
                                         <td><?php echo $row['Total_USD']; ?></td>
                                         <td><?php echo $row['Estado']; ?></td>
-                                        <td>
-                                            <a href="eliminar_piedra.php?id=<?php echo $row['ID_PP']; ?>">Eliminar</a>
-                                        </td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>

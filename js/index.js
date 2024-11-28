@@ -65,11 +65,3 @@ $(document).ready(function () {
     bDestroy: true,
   });
 });
-
-$(document).ready(function () {
-  $("#gdcTable").DataTable({
-    pageLength: 10,
-    searching: true,
-    bDestroy: true,
-  });
-});

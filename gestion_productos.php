@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Fetch existing records from the joya table
-$result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t ON j.ID_TipoJoya = t.ID_TipoJoya");
+$result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t ON j.ID_TipoJoya = t.ID_TipoJoya WHERE j.estado_joya = 0");
 
 // Fetch types of jewelry for the dropdown
 $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
@@ -57,7 +57,7 @@ $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
         <!-- Formulario para agregar una nueva joya -->
         <div class="col-12 col-xl-4">
             <div class="container">
-                <h3>Agregar Nueva Joya</h3>
+                <h5>Agregar Nueva Joya</h5>
                 <form action="gestion_productos.php" method="POST" class="p-3 border rounded">
                     <div class="form-group mb-3">
                         <label for="id_tipo_joya">Tipo de Joya</label>
@@ -151,9 +151,9 @@ $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
                                     <td><?php echo $row['SubTotalUSD_Joya']; ?></td>
                                     <td><?php echo $row['TotalUSD_Joya']; ?></td>
                                     <td><?php echo $row['Precio_Etiqueta_Joya']; ?></td>
-                                    <td>
-                                        <a href="modificar_joya.php?id=<?php echo $row['ID_Joya']; ?>" class="LoadModificarJoya">Modificar</a> | 
-                                        <a href="eliminar_joya.php?id=<?php echo $row['ID_Joya']; ?>" class="LoadEliminarJoya" onclick="return confirmDelete();">Eliminar</a>
+                                    <td>                                        
+                                        <a href="modificar_joya.php?id=<?php echo $row['ID_Joya']; ?>">Modificar</a> | 
+                                        <a href="eliminar_joya.php?id=<?php echo $row['ID_Joya']; ?>" onclick="return confirmDelete();">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -174,7 +174,7 @@ $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
     <script src="js/index.js"></script>
     <script>       
     function confirmDelete() {
-        return confirm("¿Estás seguro de que deseas eliminar este perfil?");
+        return confirm("¿Estás seguro de que deseas eliminar esta joya?");
     }
     </script>
 

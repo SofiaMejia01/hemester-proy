@@ -6,9 +6,9 @@ $username = "root"; // Default username for XAMPP
 $password = "mysql"; // Default password is empty for XAMPP
 $dbname = "hemester_marco"; // The name of your database
 
+
 // db de Sofia hemenster_marco
 // pswd sofia mysql
-
 //db de Marco hemenster_bd_users
 //pswd marco ""
 

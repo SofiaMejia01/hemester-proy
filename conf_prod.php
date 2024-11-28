@@ -24,7 +24,8 @@ $query = "SELECT
         ac.Fecha_Entrega_Taller_AC, 
         ac.Fecha_Entrega_Cliente_AC, 
         ac.Precio_AC, 
-        ac.A_Cuenta_AC, 
+        ac.A_Cuenta_AC,
+        ac.Estado_Pedido,
         ac.Saldo_AC 
     FROM 
         agenda_confección ac
@@ -168,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="saldo">Saldo</label>
                         <input type="number" step="0.01" class="form-control" id="saldo" name="saldo" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Agregar Joya</button>
+                    <button type="submit" class="btn btn-primary">Agregar Item</button>
                 </form>
             </div>
         </div>
@@ -196,6 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <th>Precio</th>
                                 <th>A Cuenta</th>
                                 <th>Saldo</th>
+                                <th>Estado Pedido</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -216,6 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <td><?php echo $row['Precio_AC']; ?></td>
                                     <td><?php echo $row['A_Cuenta_AC']; ?></td>
                                     <td><?php echo $row['Saldo_AC']; ?></td>
+                                    <td><?php echo $row['Estado_Pedido']; ?></td>
                                     <td>
                                         <a href="completar_confeccion.php?id=<?php echo $row['ID_Pedido']; ?>" onclick="return confirmCompletar();">Completar Pedido</a>
                                     </td>
