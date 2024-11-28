@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <?php endwhile; ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i>&nbsp;Agregar Usuario</button>
                 </form>
             </div>
         </div>

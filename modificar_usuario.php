@@ -124,7 +124,7 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Trabajador, u.Nombre_Usuar
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Actualizar Usuario</button>
                             </form>
                         </div>
                     </div>
@@ -187,7 +187,7 @@ $result = $conn->query("SELECT u.ID_Usuario, u.Nombre_Trabajador, u.Nombre_Usuar
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="js/ajax_modificarusuario.js"></script>  
+    <script src="js/ajax_modificarusuarios.js"></script>  
     <script src="js/index.js"></script>    
 </body>
 </html>

@@ -88,3 +88,17 @@ html {
   color: rgb(179, 175, 175);
   /*height: 55px;*/
 }
+
+
+
+.transition-icon {
+  transition: transform 0.3s ease; /* Agrega una transición suave */
+}
+
+a.collapsed .transition-icon {
+  transform: rotate(0deg); /* Ícono apunta a la derecha */
+}
+
+a:not(.collapsed) .transition-icon {
+  transform: rotate(90deg); /* Ícono apunta hacia abajo */
+}

@@ -73,8 +73,8 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                                     <label for="descripción_perfil" class="form-label">Descripción del Perfil:</label>
                                     <input type="text" name="descripción_perfil" id="descripción_perfil" class="form-control" value="<?php echo htmlspecialchars($row['Descripción_Perfil']); ?>" required>
                                 </div>
-                                <div class="form-group text-center">
-                                    <button type="submit" class="btn btn-primary px-4">Modificar</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary px-4"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Actualizar Perfil</button>
                                 </div>
                             </form> 
                         </div>

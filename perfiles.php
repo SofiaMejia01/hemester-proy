@@ -66,8 +66,8 @@ $result = $conn->query("SELECT * FROM perfiles_usuario");
                             <label for="descripción_perfil" class="form-label">Descripción del Perfil:</label>
                             <input type="text" name="descripción_perfil" id="descripción_perfil" class="form-control" required>
                         </div>
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary px-4">Agregar</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i>&nbsp;Agregar Perfil</button>
                         </div>
                     </form>
                 </div>
