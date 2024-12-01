@@ -42,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($update_stmt->execute()) {
         echo "<script>alert('Joya modificada exitosamente.');</script>";
-        header("Location: gestion_productos.php");
+        echo json_encode(['status' => 'success', 'message' => 'Se modifico exitosamente.']);
+        //header("Location: gestion_productos.php");
         exit();
     } else {
         echo "<script>alert('Error: " . $update_stmt->error . "');</script>";
@@ -73,7 +74,7 @@ $result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t O
     <div class="row">
         <div class="col-12 col-xl-4">
             <div class="container">
-                <form action="modificar_joya.php?id=<?php echo $id_joya; ?>" method="POST" class="p-3 border rounded ">
+                <form id="formModificarJoya" action="modificar_joya.php?id=<?php echo $id_joya; ?>" method="POST" class="p-3 border rounded ">
 
                     <div class="mb-3">
                         <label for="id_tipo_joya" class="form-label">Tipo de Joya</label>
@@ -180,8 +181,8 @@ $result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t O
                                     <td><?php echo $row['TotalUSD_Joya']; ?></td>
                                     <td><?php echo $row['Precio_Etiqueta_Joya']; ?></td>
                                     <td>                                        
-                                        <a href="modificar_joya.php?id=<?php echo $row['ID_Joya']; ?>">Modificar</a> | 
-                                        <a href="eliminar_joya.php?id=<?php echo $row['ID_Joya']; ?>" onclick="return confirmDelete();">Eliminar</a>
+                                        <a href="modificar_joya.php?id=<?php echo $row['ID_Joya']; ?>" class="LoadModificarJoya">Modificar</a> | 
+                                        <a href="eliminar_joya.php?id=<?php echo $row['ID_Joya']; ?>" class="LoadEliminarJoya" onclick="return confirmDelete();">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -198,7 +199,8 @@ $result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t O
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>  
-    <script src="js/index.js"></script> 
+    <script src="js/index.js"></script>
+    <script src="js/ajax_modificar_joya.js"></script> 
     <script>       
     function confirmDelete() {
         return confirm("¿Estás seguro de que deseas eliminar esta joya?");

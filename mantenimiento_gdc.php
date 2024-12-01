@@ -30,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ssssssssssssss", $categoria, $tipo, $tipo_certificado, $numero_certificado, $forma, $peso, $dimensiones, $tratamiento, $calidad, $comentarios, $ubicacion, $subtotal, $total, $estado);
 
     if ($stmt->execute()) {
-        header("Location: admin_menu.php"); // Redirect to the GDC list page
+       // header("Location: admin_menu.php"); // Redirect to the GDC list page
+       echo json_encode(['status' => 'success', 'message' => 'Se agrego exitosamente.']);
         exit();
     } else {
         echo "Error al agregar la gema: " . $stmt->error;
@@ -43,13 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valoracion de Inventario</title>
+    <title>Mantenimiento de gemas de color</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="css/menu.css">
+   
 </head>
 <body>
 
@@ -59,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-12 col-xl-4 mb-5">
                 <div class="container">
                     <h3>Agregar Nueva Gema de Color</h3>
-                    <form action="mantenimiento_gdc.php" method="POST" class="p-3 border rounded">
+                    <form id="formMantenimientoGDC" action="mantenimiento_gdc.php" method="POST" class="p-3 border rounded">
                         <div class="form-group mb-3">
                             <label for="tipo" class="form-label">Tipo de Gema:</label>
                             <input type="text" name="tipo" id="tipo" class="form-control" required>
@@ -185,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <td><?php echo $row['Total_USD']; ?></td>
                                         <td><?php echo $row['Estado']; ?></td>
                                         <td>
-                                            <a href="modificar_gema.php?id=<?php echo $row['ID_PP']; ?>">Modificar</a>
+                                            <a href="modificar_gema.php?id=<?php echo $row['ID_PP']; ?>"  class="LoadModificarGDC">Modificar</a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -200,12 +202,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     
   
-    <!-- jQuery -->
+   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables JS -->
+    
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   
     <script src="js/index.js"></script> 
+    <script src="js/ajax_gdc.js"></script> 
           
 
 

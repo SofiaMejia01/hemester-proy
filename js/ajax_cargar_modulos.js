@@ -155,9 +155,32 @@
             e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
             var href = $(this).attr('href');
             loadPage(href); // Cargar la página usando AJAX
-
             
         });
+
+        $('#contentArea').on('click', '.LoadModificarJoya', function(e) {
+            e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+            var href = $(this).attr('href');
+            loadPage(href); // Cargar la página usando AJAX
+            
+        });
+
+        $('#contentArea').on('click', '.LoadEliminarJoya', function(e) {
+            e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+            var href = $(this).attr('href');
+            loadPage(href); // Cargar la página usando AJAX
+            
+        });
+
+        $('#contentArea').on('click', '.LoadCompletarPedido', function(e) {
+            e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+            var href = $(this).attr('href');
+            loadPage(href); // Cargar la página usando AJAX
+            
+        });
+
+
+
 
         // Función para cargar contenido mediante AJAX
         function loadPage(page) {

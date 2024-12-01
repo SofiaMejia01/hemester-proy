@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Execute the statement
     if ($stmt->execute()) {
-        header("Location: admin_menu.php"); // Redirect to the diamonds list page
+        //header("Location: admin_menu.php"); // Redirect to the diamonds list page
+        echo json_encode(['status' => 'success', 'message' => 'Diamante agregado exitosamente.']);
         exit();
     } else {
         echo "Error al agregar el diamante: " . $stmt->error;
@@ -73,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-12 col-xl-4 mb-5">
                 <div class="container">
                     <h3>Agregar Nuevo Diamante</h3>
-                    <form action="mantenimiento_diamantes.php" method="POST" class="p-3 border rounded">
+                    <form id="formAgregarDiamante"  action="mantenimiento_diamantes.php" method="POST" class="p-3 border rounded">
                         <div class="form-group mb-3">
                             <label for="tipo_certificado" class="form-label">Tipo de Certificado:</label>
                             <input type="text" name="tipo_certificado" id="tipo_certificado" class="form-control" required>
@@ -229,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <td><?php echo $row['Total_USD']; ?></td>
                                         <td><?php echo $row['Estado']; ?></td>
                                         <td>
-                                            <a href="modificar_diamante.php?id=<?php echo $row['ID_PP']; ?>">Modificar</a>
+                                            <a href="modificar_diamante.php?id=<?php echo $row['ID_PP']; ?>" class="LoadModificarDiamante">Modificar</a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -247,7 +248,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   
-    <script src="js/index.js"></script> 
+    <script src="js/index.js"></script>
+    <script src="js/ajax_diamantes.js"></script>  
           
 
 

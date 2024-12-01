@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("sssssssssssssi", $tipo, $tipo_certificado, $numero_certificado, $forma, $peso, $dimensiones, $tratamiento, $calidad, $comentarios, $ubicacion, $subtotal, $total, $estado, $id);
 
     if ($stmt->execute()) {
-        header("Location: admin_menu.php"); // Redirect to the GDC list page
+        //header("Location: admin_menu.php"); // Redirect to the GDC list page
+        echo json_encode(['status' => 'success', 'message' => 'Se modifico exitosamente.']);
         exit();
     } else {
         echo "Error al modificar la gema: " . $stmt->error;
@@ -69,32 +70,21 @@ $result = mysqli_query($conn, $query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Gema</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
 
-    <h1 class="text-center">Modificar Gema de Color</h1>
+   
 
-    <div class="container my-4">
-        <div class="row">
-            <div class="col text-start">
-                <a href="admin_menu.php" class="btn btn-primary">Listado General</a>
-            </div>
-            <div class="col text-center">
-                <a href="mantenimiento_diamantes.php" class="btn btn-secondary">Diamantes GIA</a>
-            </div>
-            <div class="col text-end">
-                <a href="mantenimiento_gdc.php" class="btn btn-success">Gemas de Color</a>
-            </div>
-        </div>
-    </div>
-    <br>
-    <hr>
+
+   
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-xl-4">
                 <div class="container">
                     <h3>Modificar Gema de Color</h3>
-                    <form action="modificar_gema.php?id=<?php echo $id; ?>" method="POST" class="p-3 border rounded">
+                    <form id="formModificarGDC" action="modificar_gema.php?id=<?php echo $id; ?>" method="POST" class="p-3 border rounded">
                         <div class="form-group mb-3">
                             <label for="tipo" class="form-label">Tipo de Gema:</label>
                             <input type="text" name="tipo" id="tipo" class="form-control" value="<?php echo htmlspecialchars($gem['Tipo_PP']); ?>" required>
@@ -221,7 +211,7 @@ $result = mysqli_query($conn, $query);
                                         <td><?php echo $row['Total_USD']; ?></td>
                                         <td><?php echo $row['Estado']; ?></td>
                                         <td>
-                                            <a href="modificar_gema.php?id=<?php echo $row['ID_PP']; ?>">Modificar</a>
+                                            <a href="modificar_gema.php?id=<?php echo $row['ID_PP']; ?>" class="LoadModificarGDC">Modificar</a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -237,6 +227,7 @@ $result = mysqli_query($conn, $query);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>  
-    <script src="js/index.js"></script>         
+    <script src="js/index.js"></script>
+    <script src="js/ajax_modificarGDC.js"></script>            
 </body>
 </html>

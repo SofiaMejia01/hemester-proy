@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
 
     if ($stmt->execute()) {
         // Redirect to admin_menu.php after successful update
-        header("Location: admin_menu.php");
+        header("Location: conf_prod.php");
         exit();
     } else {
         echo "Error updating pedido: " . $stmt->error;

@@ -65,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Execute the statement and check for success
     if ($stmt->execute()) {
-        header("Location: admin_menu.php"); // Redirect to the agenda list page
+        //header("Location: admin_menu.php"); // Redirect to the agenda list page
+        echo json_encode(['status' => 'success', 'message' => 'Agregado exitosamente.']);
         exit();
     } else {
         echo "Error al agregar el pedido: " . $stmt->error; // Display error message if insertion fails
@@ -97,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-12 col-xl-4">
             <div class="container">
                 <h5>Agregar Nuevo Item para la Agenda</h5>
-                <form action="conf_prod.php" method="POST" class="p-3 border rounded">
+                <form id="formAgregarConfProd" action="conf_prod.php" method="POST" class="p-3 border rounded">
                     <div class="form-group mb-3">
                         <label for="id_cliente">Cliente</label>
                         <select class="form-select" id="id_cliente" name="id_cliente" required>
@@ -220,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <td><?php echo $row['Saldo_AC']; ?></td>
                                     <td><?php echo $row['Estado_Pedido']; ?></td>
                                     <td>
-                                        <a href="completar_confeccion.php?id=<?php echo $row['ID_Pedido']; ?>" onclick="return confirmCompletar();">Completar Pedido</a>
+                                        <a href="completar_confeccion.php?id=<?php echo $row['ID_Pedido']; ?>" class="LoadCompletarPedido" onclick="return confirmCompletar();">Completar Pedido</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -239,6 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>  
     <script src="js/index.js"></script> 
+    <script src="js/ajax_conf_produccion.js"></script>
     <script>       
     function confirmCompletar() {
         return confirm("¿Confirmar el Pedido?");

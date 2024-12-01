@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    $('#formAgregarJoya').on('submit', function (e) {
+    $('#formModificarDiamante').on('submit', function (e) {
         e.preventDefault(); // Evitar el envío tradicional del formulario
 
         // Serializar los datos del formulario
         var formData = $(this).serialize();
 
         $.ajax({
-            url: 'gestion_productos.php', // La misma URL del archivo PHP
+            url: 'modificar_diamante.php', // La misma URL del archivo PHP
             type: 'POST',
             data: formData,
             dataType: 'json', // Esperar una respuesta JSON
@@ -16,7 +16,7 @@ $(document).ready(function () {
                     alert(response.message);
 
                     // Cargar gestion_productos.php en el div deseado
-                    $('#contentArea').load('gestion_productos.php');
+                    $('#contentArea2').load('modificar_diamante.php');
                 } else {
                     // Mostrar un mensaje de error
                     alert('Error: ' + response.message);

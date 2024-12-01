@@ -1,7 +1,7 @@
 <?php
 include 'session_check.php'; 
 
-// Handle form submission
+//Manejo del formulario de envio:Esta sección maneja la lógica cuando se envía un formulario a esta página, para agregar una nueva joya a la base de datos.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_tipo_joya = $_POST['id_tipo_joya'];
     $modelo_joya = $_POST['modelo_joya'];
@@ -15,27 +15,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $total_usd_joya = $_POST['total_usd_joya'];
     $precio_etiqueta_joya = $_POST['precio_etiqueta_joya'];
 
-    // Insert new record into the joya table
+    // Se utiliza prepare para construir una consulta SQL parametrizada para insertar los datos en la tabla joya. La consulta tiene 11 marcadores de posición (?) que serán reemplazados con los valores proporcionados.
     $insert_stmt = $conn->prepare("INSERT INTO joya (ID_TipoJoya, Modelo_Joya, Metal_Joya, PesoGr_Joya, Talla_Joya, Genero_Joya, Comentario_Joya, Ubicación_Joya, SubTotalUSD_Joya, TotalUSD_Joya, Precio_Etiqueta_Joya) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    //Se utiliza bind_param para enlazar cada valor con su marcador correspondiente en la consulta.
     $insert_stmt->bind_param("isssssssddd", $id_tipo_joya, $modelo_joya, $metal_joya, $peso_gr_joya, $talla_joya, $genero_joya, $comentario_joya, $ubicacion_joya, $sub_total_usd_joya, $total_usd_joya, $precio_etiqueta_joya);
 
+
+
+    //Si tiene éxito, muestra un mensaje de confirmación y redirige al usuario a admin_menu.php.Si falla, muestra un mensaje con el error ocurrido.
     if ($insert_stmt->execute()) {
         // Optionally, you can prepare a success message
-        echo "<script>alert('Joya agregada exitosamente.');</script>";
-        header("Location: admin_menu.php");
+        //echo "<script>alert('Joya agregada exitosamente.');</script>";
+        echo json_encode(['status' => 'success', 'message' => 'Joya agregada exitosamente.']);
+        //header("Location: gestion_productos.php");
         exit();
     } else {
         echo "<script>alert('Error: " . $insert_stmt->error . "');</script>";
     }
 }
 
-// Fetch existing records from the joya table
+// Se realiza una consulta para obtener joyas existentes:
 $result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t ON j.ID_TipoJoya = t.ID_TipoJoya WHERE j.estado_joya = 0");
 
-// Fetch types of jewelry for the dropdown
+// Obtiene todos los registros de la tabla tipo_joya, que serán usados para generar un menú desplegable en el formulario. 
 $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +66,7 @@ $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
         <div class="col-12 col-xl-4">
             <div class="container">
                 <h5>Agregar Nueva Joya</h5>
-                <form action="gestion_productos.php" method="POST" class="p-3 border rounded">
+                <form  id="formAgregarJoya" action="gestion_productos.php" method="POST" class="p-3 border rounded">
                     <div class="form-group mb-3">
                         <label for="id_tipo_joya">Tipo de Joya</label>
                         <select class="form-select" id="id_tipo_joya" name="id_tipo_joya" required>
@@ -152,8 +160,8 @@ $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
                                     <td><?php echo $row['TotalUSD_Joya']; ?></td>
                                     <td><?php echo $row['Precio_Etiqueta_Joya']; ?></td>
                                     <td>                                        
-                                        <a href="modificar_joya.php?id=<?php echo $row['ID_Joya']; ?>">Modificar</a> | 
-                                        <a href="eliminar_joya.php?id=<?php echo $row['ID_Joya']; ?>" onclick="return confirmDelete();">Eliminar</a>
+                                        <a href="modificar_joya.php?id=<?php echo $row['ID_Joya']; ?>" class="LoadModificarJoya" >Modificar</a> | 
+                                        <a href="eliminar_joya.php?id=<?php echo $row['ID_Joya']; ?>" class="LoadEliminarJoya" onclick="return confirmDelete();">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -172,6 +180,7 @@ $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/ajax_productos.js"></script>
     <script>       
     function confirmDelete() {
         return confirm("¿Estás seguro de que deseas eliminar esta joya?");

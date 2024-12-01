@@ -23,6 +23,25 @@ $('#loadGemasColor').click(function() {
 
 });
 
+$('#contentArea2').on('click', '.LoadModificarDiamante', function(e) {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+
+    var href = $(this).attr('href');
+    $('#contentArea2').empty();
+    loadPage(href); // Cargar la página usando AJAX
+    
+});
+
+$('#contentArea2').on('click', '.LoadModificarGDC', function(e) {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+    var href = $(this).attr('href');
+    $('#contentArea2').empty();
+    loadPage(href); // Cargar la página usando AJAX
+    
+});
+
+
+
  
 
 

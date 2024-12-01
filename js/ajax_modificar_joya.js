@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#formAgregarJoya').on('submit', function (e) {
+    $('#formModificarJoya').on('submit', function (e) {
         e.preventDefault(); // Evitar el envío tradicional del formulario
 
         // Serializar los datos del formulario
