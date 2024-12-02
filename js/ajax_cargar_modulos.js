@@ -108,10 +108,13 @@
 
         $('#loadReporteCompraVenta').click(function() {
             loadPage('reporte_compra_venta.php');
-
             // Mostrar el spinner y ocultar el contenido
             $("#spinner").show();
             $("#contentArea").hide()
+            initializeCharts();
+           
+            
+
         });
 
         $('#loadReporteValProd').click(function() {

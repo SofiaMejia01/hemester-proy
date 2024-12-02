@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-    <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
         <!-- Formulario para agregar un nuevo certificado -->
         <div class="col-12 col-xl-4 mb-5">
@@ -139,13 +139,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <button type="submit" class="btn btn-primary">Agregar Gema</button>
                     </form>
                 </div>
-            </div>
+        </div>
         
             <!-- DataTable Section -->
-            <div class="col-12 col-xl-8 mb-5">
-                <div class="table-section bg-white p-3">
+        <div class="col-12 col-xl-8 mb-5">
+             <div class="table-section bg-white p-3">
                 <h5>Lista de Gemas de Color</h5>
-                <br>
+                
                     <div class="table-responsive">
                         <table id="gdcTable" class="display display table table-striped">
                             <thead>
@@ -194,10 +194,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
+             </div>
         </div>
     </div>
+</div>
         
     
     
@@ -206,9 +206,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  
-    <script src="js/index.js"></script> 
+    
     <script src="js/ajax_gdc.js"></script> 
+    
+    <script src="js/index.js"></script> 
+    
           
 
 

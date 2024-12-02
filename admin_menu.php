@@ -247,6 +247,13 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="js/index.js"></script>
 <script src="js/ajax_cargar_modulos.js"></script>
+<script src="https://code.highcharts.com/highcharts.js" ></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+ <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!-- Graficas -->
+<!-- <script src="js/charts.js" defer></script> -->
+          
+
 
 
 

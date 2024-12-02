@@ -3,8 +3,20 @@ include 'session_check.php';
 
 
 // Check if the 'id' parameter is provided
+
+echo "INICIO";
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
+    echo "id =>". $id;
+
+
+    if($id == null) {
+        echo "Gema no encontrada.";
+        exit();
+    }
+
+    $gem=[];
 
     // Fetch the gem details from the database based on ID
     $query = "SELECT pp.*, e.Nombre_Estado AS Estado FROM piedras_preciosas pp JOIN estado_pp e ON pp.ID_Estado = e.ID_Estado WHERE pp.ID_PP = ?";
@@ -71,6 +83,7 @@ $result = mysqli_query($conn, $query);
     <title>Modificar Gema</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+   
     <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
@@ -79,8 +92,8 @@ $result = mysqli_query($conn, $query);
 
 
    
-    <div class="container-fluid">
-        <div class="row">
+<div class="container-fluid">
+    <div class="row">
             <div class="col-12 col-xl-4">
                 <div class="container">
                     <h3>Modificar Gema de Color</h3>
@@ -166,10 +179,10 @@ $result = mysqli_query($conn, $query);
             </div>
 
              <!-- DataTable Section -->
-            <div class="col-12 col-xl-8">
-                <div class="table-section bg-white p-3">
+        <div class="col-12 col-xl-8">
+            <div class="table-section bg-white p-3">
                 <h5>Lista de Gemas de Color</h5>
-                <br>
+                
                     <div class="table-responsive">
                        <table id="gdcTable" class="display display table table-striped">
                             <thead>
@@ -218,16 +231,18 @@ $result = mysqli_query($conn, $query);
                             </tbody>
                         </table>
                     </div>
-                </div>
             </div>
         </div>
     </div>
+</div>
+
   
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>  
+    <script src="js/ajax_modificarGDC.js"></script>   
     <script src="js/index.js"></script>
-    <script src="js/ajax_modificarGDC.js"></script>            
+            
 </body>
 </html>

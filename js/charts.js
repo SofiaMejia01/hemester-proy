@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+
+
   // Pie Chart Data
   Highcharts.chart("pieChart", {
     chart: {

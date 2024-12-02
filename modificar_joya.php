@@ -54,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $tipo_joya_result = $conn->query("SELECT * FROM tipo_joya");
 
 // Fetch existing records from the joya table
-$result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t ON j.ID_TipoJoya = t.ID_TipoJoya");
+//$result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t ON j.ID_TipoJoya = t.ID_TipoJoya");
+$result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t ON j.ID_TipoJoya = t.ID_TipoJoya WHERE j.estado_joya = 0");
 
 ?>
 
@@ -65,7 +66,10 @@ $result = $conn->query("SELECT j.*, t.Nombre_Joya FROM joya j JOIN tipo_joya t O
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Joya</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+      <!-- DataTables CSS -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/navegacion.css">
 </head>
 <body>
 
