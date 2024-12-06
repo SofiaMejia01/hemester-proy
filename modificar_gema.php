@@ -4,11 +4,11 @@ include 'session_check.php';
 
 // Check if the 'id' parameter is provided
 
-echo "INICIO";
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    echo "id =>". $id;
+  
 
 
     if($id == null) {
@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $categoria = 'GDC IGI'; 
+   // $categoria = 'GDC IGI'; 
     $tipo = $_POST['tipo']; 
     $tipo_certificado = $_POST['tipo_certificado'];
     $numero_certificado = $_POST['numero_certificado'];
@@ -189,9 +189,9 @@ $result = mysqli_query($conn, $query);
                                 <tr>
                                     <th>ID</th>
                                     <th>Categoría</th>
+                                    <th>Gema</th>
                                     <th>Tipo de Certificado</th>
                                     <th>N° Certificado</th>
-                                    <th>Gema</th>
                                     <th>Forma</th>
                                     <th>Peso (CT)</th>
                                     <th>Dimensiones_MM</th>
@@ -210,9 +210,9 @@ $result = mysqli_query($conn, $query);
                                     <tr>
                                         <td><?php echo $row['ID_PP']; ?></td>
                                         <td><?php echo $row['Cat_PP']; ?></td>
+                                        <td><?php echo $row['Tipo_PP']; ?></td>
                                         <td><?php echo $row['Tipo_Certificado']; ?></td>
                                         <td><?php echo $row['N°_Certificado']; ?></td>
-                                        <td><?php echo $row['Tipo_PP']; ?></td>
                                         <td><?php echo $row['Forma']; ?></td>
                                         <td><?php echo $row['Peso_CT']; ?></td>
                                         <td><?php echo $row['Dimensiones_MM']; ?></td>
@@ -240,9 +240,10 @@ $result = mysqli_query($conn, $query);
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> 
+    <script src="js/index.js"></script> 
     <script src="js/ajax_modificarGDC.js"></script>   
-    <script src="js/index.js"></script>
+    
             
 </body>
 </html>

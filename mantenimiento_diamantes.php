@@ -2,15 +2,21 @@
 include 'session_check.php';
  
 $states_result = [];
-// Fetch states
+
+
+
+// Aquí se ejecuta una consulta SQL que obtiene los nombres de los estados (Nombre_Estado) desde la tabla estado_pp.
+//El resultado se almacena en $states_result. Esta variable se usará, probablemente, para mostrar los estados en un formulario o para alguna otra lógica.
 $states_query = "SELECT Nombre_Estado FROM estado_pp";
 $states_result = $conn->query($states_query);
 
-//Fetch all the rows in result set diamantes.
+//Se recuperan todos los registros de la tabla piedras_preciosas (con alias pp) y se une con la tabla estado_pp (alias e) usando ID_Estado como clave.
+//Filtra los resultados donde Cat_PP (Categoría de piedra preciosa) sea igual a 'Diamante GIA'.
+//El resultado incluye todas las columnas de piedras_preciosas y el nombre del estado asociado (Nombre_Estado) con un alias como Estado.
 $query = "SELECT pp.*, e.Nombre_Estado AS Estado FROM piedras_preciosas pp JOIN estado_pp e ON pp.ID_Estado = e.ID_Estado WHERE pp.Cat_PP = 'Diamante GIA'";
 $result = mysqli_query($conn, $query);
 
-// Check if the form is submitted
+// El siguiente bloque maneja el envío del formulario con el método POST.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categoria = 'Diamante GIA'; // Fixed category
     $tipo = 'Diamante'; // Fixed type
@@ -27,17 +33,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $simetria = $_POST['simetria'];
     $fluorescencia = $_POST['fluorescencia'];
     $tratamiento = $_POST['tratamiento'];
+    $calidad = $_POST['calidad'];
     $comentarios = $_POST['comentarios'];
     $ubicacion = $_POST['ubicacion'];
     $subtotal = $_POST['subtotal'];
     $total = $_POST['total'];
     $estado = $_POST['estado'];
 
-    // Prepare the SQL statement to insert the new diamond record
-    $stmt = $conn->prepare("INSERT INTO piedras_preciosas (Cat_PP, Tipo_PP, Tipo_Certificado, N°_Certificado, Forma, Peso_CT, Dimensiones_MM, Color, Claridad, Corte, Pulido, Simetría, Fluorescencia, Tratamiento, Comentarios, Ubicación, SubTotal_USD, Total_USD, ID_Estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, (SELECT ID_Estado FROM estado_pp WHERE Nombre_Estado = ?))");
+    // e utiliza una consulta preparada para evitar inyecciones SQL.
+    //Los valores de las columnas de la tabla piedras_preciosas se insertan con valores proporcionados por el formulario.
+   //a columna ID_Estado no recibe un valor directo, sino que se obtiene dinámicamente con un subconsulta que busca el ID_Estado correspondiente al nombre del estado (Nombre_Estado).
+    $stmt = $conn->prepare("INSERT INTO piedras_preciosas (Cat_PP, Tipo_PP, Tipo_Certificado, N°_Certificado, Forma, Peso_CT, Dimensiones_MM, Color, Claridad, Corte, Pulido, Simetría, Fluorescencia, Tratamiento, Calidad, Comentarios, Ubicación, SubTotal_USD, Total_USD, ID_Estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, (SELECT ID_Estado FROM estado_pp WHERE Nombre_Estado = ?))");
 
     // Bind parameters
-    $stmt->bind_param("sssssssssssssssssss", $categoria, $tipo, $tipo_certificado, $numero_certificado, $forma, $peso, $dimensiones, $color, $claridad, $corte, $pulido, $simetria, $fluorescencia, $tratamiento, $comentarios, $ubicacion, $subtotal, $total, $estado);
+    $stmt->bind_param("ssssssssssssssssssss", $categoria, $tipo, $tipo_certificado, $numero_certificado, $forma, $peso, $dimensiones, $color, $claridad, $corte, $pulido, $simetria, $fluorescencia, $tratamiento, $calidad, $comentarios, $ubicacion, $subtotal, $total, $estado);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -134,6 +143,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <label for="tratamiento" class="form-label">Tratamiento:</label>
                             <input type="text" name="tratamiento" id="tratamiento" class="form-control" required>
                         </div>
+
+                        <div class="form-group mb-3">
+                            <label for="tratamiento" class="form-label">Calidad:</label>
+                            <input type="text" name="calidad" id="calidad" class="form-control" required>
+                        </div>
                         
                         <div class="form-group mb-3">
                             <label for="comentarios" class="form-label">Comentarios:</label>
@@ -198,6 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <th>Simetría</th>
                                     <th>Fluorescencia</th>
                                     <th>Tratamiento</th>
+                                    <th>Calidad</th>
                                     <th>Comentarios</th>
                                     <th>Ubicación</th>
                                     <th>SubTotal (USD)</th>
@@ -224,6 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <td><?php echo $row['Simetría']; ?></td>
                                         <td><?php echo $row['Fluorescencia']; ?></td>
                                         <td><?php echo $row['Tratamiento']; ?></td>
+                                        <td><?php echo $row['Calidad']; ?></td>
                                         <td><?php echo $row['Comentarios']; ?></td>
                                         <td><?php echo $row['Ubicación']; ?></td>
                                         <td><?php echo $row['SubTotal_USD']; ?></td>

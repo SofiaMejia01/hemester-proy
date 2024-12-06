@@ -1,24 +1,36 @@
 <?php
 include 'session_check.php';
 
-// Check if the diamond ID is provided in the URL
+// El script comprueba si el parámetro id está presente en la URL (por ejemplo, pagina.php?id=123). Si no está, detiene la ejecución y muestra un mensaje de error.
 if (!isset($_GET['id'])) {
-    echo "Error: ID no proporcionado.";
+    echo "ID de diamante no proporcionado.";
     exit();
 }
 
-// Get the diamond ID
-$diamond_id = $_GET['id'];
+// El id se almacena en la variable $diamond_id.
+$diamond_id = intval($_GET['id']);
 
-// Fetch current diamond data
+//Consulta SQL que selecciona todos los datos (pp.*) del diamante con un ID_PP específico. También trae el Nombre_Estado asociado desde la tabla estado_pp mediante un JOIN.
 $query = "SELECT pp.*, e.Nombre_Estado AS Estado FROM piedras_preciosas pp 
           JOIN estado_pp e ON pp.ID_Estado = e.ID_Estado 
           WHERE pp.ID_PP = ?";
+
+//Crea una consulta preparada. Esto mejora la seguridad al prevenir ataques de inyección SQL al separar los datos dinámicos (proporcionados por el usuario) de la lógica de la consulta.
 $stmt = $conn->prepare($query);
+
+//Asocia el marcador de posición ? en la consulta con la variable $diamond_id.
+//"i": Especifica que el parámetro es un entero (i de integer). Esto ayuda a la base de datos a entender el tipo de dato y lo valida automáticamente.
+//$diamond_id: Es el valor real que se pasa al marcador de posición en la consulta (en este caso, el ID de la piedra preciosa).
 $stmt->bind_param("i", $diamond_id);
+
+//Ejecuta la consulta preparada con los parámetros vinculados. En este punto, la base de datos procesa la consulta y devuelve los resultados.
 $stmt->execute();
+
+//Recupera el resultado de la consulta ejecutada en forma de un objeto que puede ser iterado o procesado para extraer los datos.
 $result = $stmt->get_result();
 
+
+//Si no se encuentran registros para ese ID:Detiene la ejecución y muestra un mensaje de error.
 if ($result->num_rows == 0) {
     echo "Error: Diamante no encontrado.";
     exit();
@@ -29,18 +41,25 @@ $diamante = $result->fetch_assoc();
 
 // Fetch states
 $states_result = [];
+//Consulta los nombres de todos los estados de la tabla estado_pp
 $states_query = "SELECT Nombre_Estado FROM estado_pp";
 $states_result = $conn->query($states_query);
 
 
 
-//Fetch all the rows in result set diamantes.
+// Recuperación de Todos los Diamantes GIA
+//Obtiene todos los diamantes con categoría 'Diamante GIA'. Este bloque parece redundante en este contexto, a menos que los datos se usen en la interfaz.
 $query = "SELECT pp.*, e.Nombre_Estado AS Estado FROM piedras_preciosas pp JOIN estado_pp e ON pp.ID_Estado = e.ID_Estado WHERE pp.Cat_PP = 'Diamante GIA'";
 $result = mysqli_query($conn, $query);
 
-// Check if the form is submitted
+
+
+
+//  Actualización del Registro del Diamante
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get form inputs
+    //$categoria = 'Diamante GIA'; 
+    //$tipo = 'Diamante'; 
+    // Los datos enviados desde el formulario se asignan a variables.
     $tipo_certificado = $_POST['tipo_certificado'];
     $numero_certificado = $_POST['numero_certificado'];
     $forma = $_POST['forma'];
@@ -53,49 +72,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $simetria = $_POST['simetria'];
     $fluorescencia = $_POST['fluorescencia'];
     $tratamiento = $_POST['tratamiento'];
+    $calidad = $_POST['calidad'];
     $comentarios = $_POST['comentarios'];
     $ubicacion = $_POST['ubicacion'];
     $subtotal = $_POST['subtotal'];
     $total = $_POST['total'];
     $estado = $_POST['estado'];
 
-    // Prepare the SQL statement to update the diamond record
-    $stmt = $conn->prepare("UPDATE piedras_preciosas SET 
-                            Tipo_Certificado = ?, 
-                            N°_Certificado = ?, 
-                            Forma = ?, 
-                            Peso_CT = ?, 
-                            Dimensiones_MM = ?, 
-                            Color = ?, 
-                            Claridad = ?, 
-                            Corte = ?, 
-                            Pulido = ?, 
-                            Simetría = ?, 
-                            Fluorescencia = ?, 
-                            Tratamiento = ?, 
-                            Comentarios = ?, 
-                            Ubicación = ?, 
-                            SubTotal_USD = ?, 
-                            Total_USD = ?, 
-                            ID_Estado = (SELECT ID_Estado FROM estado_pp WHERE Nombre_Estado = ?)
-                            WHERE ID_PP = ?");
-    
-    // Bind parameters
-    $stmt->bind_param("ssssssssssssssssss", $tipo_certificado, $numero_certificado, $forma, $peso, $dimensiones, $color, $claridad, $corte, $pulido, $simetria, $fluorescencia, $tratamiento, $comentarios, $ubicacion, $subtotal, $total, $estado, $diamond_id);
+    // Consulta de Actualización: Actualiza las columnas de la tabla piedras_preciosas  
+        // Actualiza los datos del diamante.
+    $update_query = "UPDATE piedras_preciosas 
+                         SET Tipo_Certificado = ?, `N°_Certificado` = ?, Forma = ?, Peso_CT = ?, Dimensiones_MM = ?, 
+                             Color = ?, Claridad = ?, Corte = ?, Pulido = ?, `Simetría` = ?, Fluorescencia = ?, 
+                            Tratamiento = ?, Calidad = ?, Comentarios = ?, Ubicación = ?, SubTotal_USD = ?, 
+                             Total_USD = ?, ID_Estado = (SELECT ID_Estado FROM estado_pp WHERE Nombre_Estado = ?)
+                         WHERE ID_PP = ?";
 
-    // Execute the statement
-    if ($stmt->execute()) {
-        //header("Location: admin_menu.php"); // Redirect to the diamonds list page
-        echo json_encode(['status' => 'success', 'message' => 'Se modifico exitosamente.']);
-        exit();
-    } else {
-        echo "Error al modificar el diamante: " . $stmt->error;
-    }
+    $stmt = $conn->prepare($update_query);
+    $stmt->bind_param("ssssssssssssssssssi", $tipo_certificado, $numero_certificado, $forma, $peso, $dimensiones,$color, $claridad, $corte, $pulido, $simetria, $fluorescencia, $tratamiento, $calidad, $comentarios, $ubicacion, $subtotal, $total, $estado, $diamond_id);
 
-    // Close the statement
-    $stmt->close();
+   if ($stmt->execute()) {
+     echo json_encode(['status' => 'success', 'message' => 'Diamante modificado exitosamente.']);
+    exit();
+   } else {
+   echo "Error al modificar el diamante: " . $stmt->error;
+   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -176,6 +178,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <label for="tratamiento" class="form-label">Tratamiento:</label>
                             <input type="text" name="tratamiento" id="tratamiento" class="form-control" value="<?php echo htmlspecialchars($diamante['Tratamiento']); ?>" required>
                         </div>
+
+                        <div class="form-group mb-3">
+                            <label for="calidad" class="form-label">Calidad:</label>
+                            <input type="text" name="calidad" id="calidad" class="form-control" value="<?php echo htmlspecialchars($diamante['Calidad']); ?>" required>
+                        </div>
                         
                         <div class="form-group mb-3">
                             <label for="comentarios" class="form-label">Comentarios:</label>
@@ -244,6 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <th>Simetría</th>
                                     <th>Fluorescencia</th>
                                     <th>Tratamiento</th>
+                                    <th>Calidad</th>
                                     <th>Comentarios</th>
                                     <th>Ubicación</th>
                                     <th>SubTotal (USD)</th>
@@ -270,6 +278,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <td><?php echo $row['Simetría']; ?></td>
                                         <td><?php echo $row['Fluorescencia']; ?></td>
                                         <td><?php echo $row['Tratamiento']; ?></td>
+                                        <td><?php echo $row['Calidad']; ?></td>
                                         <td><?php echo $row['Comentarios']; ?></td>
                                         <td><?php echo $row['Ubicación']; ?></td>
                                         <td><?php echo $row['SubTotal_USD']; ?></td>

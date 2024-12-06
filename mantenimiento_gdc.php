@@ -152,9 +152,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <tr>
                                     <th>ID</th>
                                     <th>Categoría</th>
+                                    <th>Gema</th>
                                     <th>Tipo de Certificado</th>
                                     <th>N° Certificado</th>
-                                    <th>Gema</th>
                                     <th>Forma</th>
                                     <th>Peso (CT)</th>
                                     <th>Dimensiones_MM</th>
@@ -173,9 +173,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <tr>
                                         <td><?php echo $row['ID_PP']; ?></td>
                                         <td><?php echo $row['Cat_PP']; ?></td>
+                                        <td><?php echo $row['Tipo_PP']; ?></td>
                                         <td><?php echo $row['Tipo_Certificado']; ?></td>
                                         <td><?php echo $row['N°_Certificado']; ?></td>
-                                        <td><?php echo $row['Tipo_PP']; ?></td>
                                         <td><?php echo $row['Forma']; ?></td>
                                         <td><?php echo $row['Peso_CT']; ?></td>
                                         <td><?php echo $row['Dimensiones_MM']; ?></td>
