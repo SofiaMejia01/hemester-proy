@@ -42,6 +42,7 @@ $(document).ready(function () {
   });
 });
 
+/*
 $(document).ready(function () {
   $("#ppTable").DataTable({
     pageLength: 10,
@@ -49,7 +50,9 @@ $(document).ready(function () {
     bDestroy: true,
   });
 });
+*/
 
+/*
 $(document).ready(function () {
   $("#diamantesTable").DataTable({
     pageLength: 10,
@@ -57,6 +60,7 @@ $(document).ready(function () {
     bDestroy: true,
   });
 });
+*/
 
 $(document).ready(function () {
   $("#gdcTable").DataTable({

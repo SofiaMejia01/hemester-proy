@@ -17,6 +17,7 @@ if (isset($_GET['id'])) {
     }
 
     $gem=[];
+  
 
     // Fetch the gem details from the database based on ID
     $query = "SELECT pp.*, e.Nombre_Estado AS Estado FROM piedras_preciosas pp JOIN estado_pp e ON pp.ID_Estado = e.ID_Estado WHERE pp.ID_PP = ?";
@@ -73,6 +74,9 @@ $states_result = $conn->query($states_query);
 // Fetch GDC gems (GDC IGI) from the database
 $query = "SELECT pp.*, e.Nombre_Estado AS Estado FROM piedras_preciosas pp JOIN estado_pp e ON pp.ID_Estado = e.ID_Estado WHERE pp.Cat_PP = 'GDC IGI'";
 $result = mysqli_query($conn, $query);
+
+
+
 ?>
 
 <!DOCTYPE html>

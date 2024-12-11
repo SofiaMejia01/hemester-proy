@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h5>Lista de Diamantes</h5>
                 <br>
                     <div class="table-responsive">
-                        <table id="diamantesTable" class="display display table table-striped">
+                        <table id="diamantesTable" class="display table table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -246,7 +246,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <td><?php echo $row['Total_USD']; ?></td>
                                         <td><?php echo $row['Estado']; ?></td>
                                         <td>
-                                            <a href="modificar_diamante.php?id=<?php echo $row['ID_PP']; ?>" class="LoadModificarDiamante">Modificar</a>
+                                        <a href="#" class="LoadModificarDiamante" data-id="<?php echo $row['ID_PP']; ?>">Modificar</a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
